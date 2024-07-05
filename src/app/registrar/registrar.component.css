@@ -1,0 +1,88 @@
+.formulario {
+  display: flex;
+  flex-direction: column;
+  max-width: 30vw;
+  width: 30vw;
+  margin-left: 20vw;
+  margin-right: 5vw;
+  padding: 20px;
+  background-color: #fafafa;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  align-items: left;
+}
+
+.loginHeader {
+  max-width: 85vw;
+  margin-left: 20vw;
+  margin-right: 5vw;
+  padding-top: 1vh;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.registrar_botao {
+  margin-right: auto;
+  margin-left: auto;
+  text-transform: uppercase;
+  width: auto;
+  background-color: rgb(0, 174, 255);
+  transition: background-color 0.3s ease;
+}
+
+.registrar_botao:hover {
+  background-color: rgb(0, 117, 172);
+}
+
+.registrar_botao:active{
+  background-color: white;
+  outline: none;
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 10px;
+  max-width: 85vw;
+  margin-left: 20vw;
+  margin-right: 5vw;
+}
+
+.success-message {
+  color: green;
+  margin-bottom: 10px;
+  max-width: 85vw;
+  margin-left: 20vw;
+  margin-right: 5vw;
+}
+
+
+.mat-icon {
+  background-color: black;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+}
+
+.input-container i.material-icons {
+  margin-right: 0.7vw;
+}
+
+.mat-form-field {
+  width: 100%;
+  margin-bottom: auto;
+}
+
+.input-container input {
+  text-transform: capitalize;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #fafafa inset !important;
+    -webkit-text-fill-color: #000 !important;
+}

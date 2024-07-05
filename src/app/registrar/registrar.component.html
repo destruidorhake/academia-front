@@ -1,0 +1,95 @@
+<!-- Título -->
+<header>
+  <h3 class="loginHeader">Registrar Aluno</h3>
+</header>
+
+<!-- Se houver mensagem de erro, exibir em vermelho -->
+<div *ngIf="errorMessage" class="error-message">
+  {{ errorMessage }}
+</div>
+
+<!-- Se houver mensagem de sucesso, exibir em verde -->
+<div *ngIf="successMessage" class="success-message">
+  {{ successMessage }}
+</div>
+
+<!-- Formulário de registro de aluno -->
+<form [formGroup]="alunoForm" (ngSubmit)="registrarAluno()" class="formulario">
+
+  <!-- Nome -->
+  <mat-form-field class="mat-form-field" appearance="outline">
+    <mat-label>Nome</mat-label>
+    <div class="input-container">
+      <i class="material-icons">person</i>
+      <input matInput formControlName="nome" placeholder="Nome" maxlength="40" required>
+    </div>
+  </mat-form-field>
+
+  <!-- CPF -->
+  <mat-form-field class="mat-form-field" appearance="outline">
+    <mat-label>CPF</mat-label>
+    <div class="input-container">
+      <i class="material-icons">call_to_action</i>
+      <input matInput formControlName="cpf" placeholder="CPF" mask="000.000.000-00" maxlength="14" required>
+    </div>
+  </mat-form-field>
+
+  <!-- Telefone -->
+  <mat-form-field class="mat-form-field" appearance="outline">
+    <mat-label>Telefone</mat-label>
+    <div class="input-container">
+      <i class="material-icons">phone</i>
+      <input matInput formControlName="telefone" placeholder="Telefone" mask="(00) 00000-0000" required>
+    </div>
+  </mat-form-field>
+
+  <!-- CEP -->
+   <mat-form-field class="mat-form-field" appearance="outline">
+    <mat-label>CEP</mat-label>
+    <div class="input-container">
+      <i class="material-icons">location_on</i>
+      <input matInput formControlName="cep" placeholder="CEP" mask="00000-000" required>
+    </div>
+  </mat-form-field>
+
+  <!-- Logradouro -->
+  <mat-form-field class="mat-form-field" appearance="outline">
+    <mat-label>Logradouro</mat-label>
+    <div class="input-container">
+      <i class="material-icons">business</i>
+      <input matInput formControlName="logradouro" placeholder="Logradouro" maxlength="50" required>
+    </div>
+  </mat-form-field>
+
+
+  <!-- Bairro -->
+  <mat-form-field class="mat-form-field" appearance="outline">
+    <mat-label>Bairro</mat-label>
+    <div class="input-container">
+      <i class="material-icons">location_city</i>
+      <input matInput formControlName="bairro" placeholder="Bairro" maxlength="50" required>
+    </div>
+  </mat-form-field>
+
+  <!-- Estado -->
+  <mat-form-field class="mat-form-field" appearance="outline">
+    <mat-label>Estado</mat-label>
+    <div class="input-container">
+      <i class="material-icons">location_on</i>
+      <input matInput formControlName="estado" placeholder="Estado" maxlength="20" required>
+    </div>
+  </mat-form-field>
+
+  <!-- UF -->
+  <mat-form-field class="mat-form-field" appearance="outline">
+    <mat-label>UF</mat-label>
+    <div class="input-container">
+      <i class="material-icons">location_on</i>
+      <input matInput formControlName="uf" placeholder="UF" maxlength="20" required>
+    </div>
+  </mat-form-field>
+
+  <!-- Botão de Registrar -->
+  <button class="registrar_botao btn" type="submit">Registrar</button>
+
+</form>

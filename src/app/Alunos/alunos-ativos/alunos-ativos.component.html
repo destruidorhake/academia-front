@@ -1,0 +1,51 @@
+<!-- título -->
+<header>
+  <h3 class="loginHeader">Alunos Ativos</h3>
+</header>
+
+<div class="input-field pesquisar">
+  <i class="material-icons prefix" (click)="focusInput()" for="search">search</i>
+  <input #searchInput id="search" type="text" (keyup)="applyFilter($event)" placeholder="Pesquisar por Nome, CPF, Telefone ou Data">
+</div>
+
+<div class="mat-elevation-z8 custom-table">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!-- Nome Column -->
+    <ng-container matColumnDef="nome">
+      <th mat-header-cell *matHeaderCellDef class=" nome-column"> Nome </th>
+      <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
+    </ng-container>
+
+    <!-- CPF Column -->
+    <ng-container matColumnDef="cpf">
+      <th mat-header-cell *matHeaderCellDef class=" cpf-column"> CPF </th>
+      <td mat-cell *matCellDef="let element"> {{element.cpf}} </td>
+    </ng-container>
+
+    <!-- Telefone Column -->
+    <ng-container matColumnDef="telefone">
+      <th mat-header-cell *matHeaderCellDef class=" telefone-column"> Telefone </th>
+      <td mat-cell *matCellDef="let element"> {{element.telefone}} </td>
+    </ng-container>
+
+    <!-- Endereço Column -->
+    <ng-container matColumnDef="endereco">
+      <th mat-header-cell *matHeaderCellDef class=" endereco-column"> Endereço </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.endereco.logradouro}}, {{element.endereco.bairro}}, {{element.endereco.estado}}, {{element.endereco.uf}}
+      </td>
+    </ng-container>
+
+    <!-- Data de Criação Column -->
+    <ng-container matColumnDef="dataCriacao">
+      <th mat-header-cell *matHeaderCellDef class=" dataCriacao-column"> Data de Criação </th>
+      <td mat-cell *matCellDef="let element"> {{element.dataCriacao}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+   <!-- Paginador -->
+   <mat-paginator class="paginator" showFirstLastButtons [pageSize]="10" pageSize="10" [length]="dataSource.data.length"/>
+</div>

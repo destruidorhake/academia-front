@@ -1,0 +1,43 @@
+<div class="sidebar fundo">
+  <h3 class="logoAcademia text-content">
+    <i class="medium material-icons">fitness_center</i> Academia
+  </h3>
+  <ul class="text-content">
+
+     <!-- ALUNOS ATIVOS-->
+     <li>
+      <a class="logo" [routerLink]="['/ativos']" [routerLinkActive]="['/alunos']">
+        <i class="material-icons small">people</i> Alunos Ativos
+      </a>
+    </li>
+
+    <!-- ALUNOS CADASTRADOS-->
+    <li>
+      <a class="logo" [routerLink]="['/alunos']" [routerLinkActive]="['/alunos']">
+        <i class="material-icons small">people_outline</i> Alunos Cadastrados
+      </a>
+    </li>
+
+    <!-- REGISTRAR -->
+    <li>
+      <a class="logo" [routerLink]="['/registrar']" [routerLinkActive]="['/registrar']">
+        <i class="material-icons small">person_add</i>Registrar Aluno
+      </a>
+    </li>
+
+    <!-- MENSALIDADES -->
+    <li>
+      <a class="logo" [routerLink]="['/mensalidade']" [routerLinkActive]="['/mensalidade']">
+        <i class="material-icons small">local_atm</i> Mensalidades
+      </a>
+    </li>
+
+    <!-- SAIR -->
+    <li>
+      <a class="logo" [routerLink]="['/login']" (click)="logout()">
+        <i class="material-icons small">login</i> Sair
+      </a>
+    </li>
+  </ul>
+</div>
+
