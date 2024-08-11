@@ -8,18 +8,25 @@ import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
-
-
 @Component({
   selector: 'app-side-bar',
   standalone: true,
-  imports: [RouterModule, CommonModule, MatOptionModule, MatTableModule, MatIconModule, MatIconButton, MatIconAnchor, MatButtonModule, MatSidenavModule, MatToolbarModule],
+  imports: [
+    RouterModule,
+    CommonModule,
+    MatOptionModule,
+    MatTableModule,
+    MatIconModule,
+    MatIconButton,
+    MatIconAnchor,
+    MatButtonModule,
+    MatSidenavModule,
+    MatToolbarModule],
   templateUrl: './side-bar.component.html',
   styleUrl: './side-bar.component.css'
 })
 export class SideBarComponent implements OnInit  {
 
-  isDarkTheme: boolean = false;
   showNavbar: boolean = false;
 
   constructor(private router: Router) {
@@ -32,14 +39,17 @@ export class SideBarComponent implements OnInit  {
     });
   }
 
+  // METODO PARA EVITAR MOSTRAR A SIDEBAR NAS TELAS
   shouldShowNavbar(url: string): boolean {
     return !url.includes('/login');
   }
 
+  // METODO PARA INICIALIZAR
   ngOnInit(): void {
     this.showNavbar = true;
   }
 
+  // METODO PARA SAIR
   logout() {
     localStorage.clear();
     sessionStorage.clear();
@@ -53,13 +63,6 @@ export class SideBarComponent implements OnInit  {
     this.router.navigate(['/login']).then(() => {
       window.location.reload();
     });
-  }
-
-  toggleTheme() {
-    this.isDarkTheme = !this.isDarkTheme;
-    const theme = this.isDarkTheme ? 'dark-theme' : 'light-theme';
-    document.body.classList.remove('dark-theme', 'light-theme');
-    document.body.classList.add(theme);
   }
 
 }

@@ -105,22 +105,42 @@
 }
 
 .nome-column {
-  width: 25%;
+  width: 19%;
 }
 
-.cpf-column {
+.nascimento-column {
+  width: 12%;
+}
+
+.criacao-column {
   width: 10%;
 }
 
 .telefone-column {
-  width: 10%;
+  width: 12%;
 }
 
 .endereco-column {
-  width: 25%;
+  width: 20%;
 }
 
 .actions-column {
   width: 30%;
   justify-content: center;
+}
+
+.bloqueia_tabela {
+  height: 100dvh;
+  width: 100dvw;
+  background-color: black;
+  z-index: 2;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100dvw;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 4;
 }

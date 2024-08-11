@@ -7,7 +7,7 @@
 }
 
 .fundo {
-    background-image: url("../../app/Imagens/fundo.png");
+    background-image: url("../../../app/models/Imagens/fundo.png");
     background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;
@@ -107,4 +107,36 @@ input:-webkit-autofill:active {
     text-align: center;
     margin-top: 5vh;
     text-decoration: underline;
+}
+
+.alert-danger {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+  max-width: fit-content;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+  text-transform: capitalize;
+  padding: 0.5vw;
+  border: 0.5px solid;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.438);
+}
+
+.alert-info {
+  color: #31708f;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+  max-width: fit-content;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+  text-transform: capitalize;
+  padding: 0.5vw;
+  border: 0.5px solid;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.438);
 }

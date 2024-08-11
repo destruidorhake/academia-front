@@ -4,15 +4,15 @@ import { FormsModule } from '@angular/forms';
 import { MatOptionModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { AlunosService } from '../Services/alunos.service';
-import { Mensalidade } from '../Alunos/models/aluno.model';
-import { MatSelectModule } from '@angular/material/select';
+import { Mensalidade } from '../../models/aluno.model';
+import { AlunosService } from '../../Services/Alunos.Service/alunos.service';
 
 @Component({
-  selector: 'app-mensalidade',
+  selector: 'app-mensalidades-alunos-totais',
   standalone: true,
   imports: [
     CommonModule,
@@ -25,20 +25,18 @@ import { MatSelectModule } from '@angular/material/select';
     MatFormFieldModule,
     MatPaginatorModule,
     MatSelectModule],
-  templateUrl: './mensalidade.component.html',
-  styleUrl: './mensalidade.component.css'
+  templateUrl: './mensalidades-alunos-totais.component.html',
+  styleUrl: './mensalidades-alunos-totais.component.css'
 })
-export class MensalidadeComponent {
-
+export class MensalidadesAlunosTotaisComponent {
   statusOptions: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   dataSource = new MatTableDataSource<Mensalidade>();
-  displayedColumns: string[] = ['nome', 'cpf', 'dataVencimento', 'valor', 'status'];
+  displayedColumns: string[] = ['nome', 'dataVencimento', 'valor', 'status']; // Removido 'actions'
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
 
-  constructor(private alunosService: AlunosService) {
-  }
+  constructor(private alunosService: AlunosService) { }
 
   ngOnInit(): void {
     this.dataSource.paginator = this.paginator;
@@ -75,7 +73,6 @@ export class MensalidadeComponent {
         const searchString = filter.toLowerCase();
         return (
           data.aluno.nome.toLowerCase().includes(searchString) ||
-          data.aluno.cpf.toLowerCase().includes(searchString) ||
           data.dataVencimento.toLowerCase().includes(searchString) ||
           data.valor.toString().includes(searchString) ||
           this.getStatusName(data.status).toLowerCase().includes(searchString) // Aqui usamos getStatusName
@@ -85,5 +82,4 @@ export class MensalidadeComponent {
       this.dataSource.filter = '';
     }
   }
-
 }

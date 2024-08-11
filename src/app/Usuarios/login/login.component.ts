@@ -8,27 +8,38 @@ import { filter } from 'rxjs';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [RouterModule,FormsModule],
+  imports: [RouterModule,FormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  username: string = '';
+  email: string = '';
   password: string = '';
+  errorMessage: string = '';
+  infoMessage: string = '';
   loginError: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
+  // METODO INICIAL DO COMPONENTE
   ngOnInit(): void {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
         if (this.router.url === '/login') {
-          window.location.reload();
+          this.resetToLogin();
         }
       });
   }
 
+  // METODO PARA LIMPAR CACHE E RESETAR O SITE
+  resetToLogin(): void {
+    this.router.navigateByUrl('/login', { replaceUrl: true }).then(() => {
+      window.location.reload();
+    });
+  }
+
+  // METODO PARA DESABILITAR AUTO COMPLETE DO ANGULAR NAS PAGINAS
   disableAutocomplete() {
     const inputField = document.getElementById('password') as HTMLInputElement;
     if (inputField) {
@@ -36,11 +47,21 @@ export class LoginComponent {
     }
   }
 
+  // MÉTODO PARA REALIZAR LOGIN
   onLogin(): void {
-    if (this.authService.login(this.username, this.password)) {
-      this.router.navigate(['/alunos']); // Redireciona para a página de alunos após o login
-    } else {
-      this.loginError = true; // Exibe mensagem de erro no login
-    }
+    this.authService.login(this.email, this.password).subscribe({
+      next: (success: boolean) => {
+        if (success) {
+          this.router.navigate(['/search']);  // Redirecionar para a página inicial ou dashboard
+        } else {
+          this.infoMessage = 'Login falhou. Verifique suas credenciais!';
+          this.loginError = true;
+        }
+      },
+      error: () => {
+        this.errorMessage = 'Erro ao enviar as credenciais de login!';
+        this.loginError = true;
+      }
+    });
   }
 }

@@ -1,22 +1,15 @@
 <header>
-  <h3 class="loginHeader">Atualizar Aluno</h3>
+  <h3 class="loginHeader">Registrar Aluno</h3>
 </header>
 
-<!-- Formulário de atualização de aluno -->
-<form [formGroup]="alunoForm" (ngSubmit)="atualizarAluno()" class="formulario">
+<!-- Formulário de registro de aluno -->
+<form [formGroup]="alunoForm" (ngSubmit)="registrarAluno()" class="formulario">
 
   <!-- Nome -->
   <label class="label"> NOME ALUNO</label>
   <div class="input-container">
     <i class="material-icons">person</i>
     <input matInput formControlName="nome" placeholder="Nome" maxlength="40" required type="text">
-  </div>
-
-  <!-- Data de Nascimento -->
-  <label class="label"> DATA DE NASCIMENTO </label>
-  <div class="input-container">
-    <i class="material-icons">calendar_today</i>
-    <input matInput formControlName="dataNascimento" type="date" required>
   </div>
 
   <!-- Telefone -->
@@ -26,12 +19,24 @@
     <input matInput formControlName="telefone" placeholder="Telefone" mask="(00) 00000-0000" required type="tel">
   </div>
 
-  <!-- ENDEREÇO -->
-  <!-- CEP -->
-  <label class="label"> CEP </label>
-  <div class="input-container">
-    <i class="material-icons">location_on</i>
-    <input matInput formControlName="cep" placeholder="CEP" mask="00000-000" required type="text">
+  <div class="ladoAlado">
+    <!-- Data de Nascimento -->
+    <div class="field-container">
+      <label class="labelData"> DATA DE NASCIMENTO </label>
+      <div class="input-container inputData">
+        <i class="material-icons">calendar_today</i>
+        <input matInput #dateInput formControlName="dataNascimento" type="date" required (focus)="dateInput.showPicker()" (keydown)="blockInput($event)" [attr.max]="maxDate"/>
+      </div>
+    </div>
+
+    <!-- CEP -->
+    <div class="field-container">
+      <label class="labelCep"> CEP </label>
+      <div class="input-container inputCep">
+        <i class="material-icons">location_on</i>
+        <input matInput formControlName="cep" placeholder="CEP" mask="00000-000" required type="text">
+      </div>
+    </div>
   </div>
 
   <!-- Logradouro -->
@@ -47,10 +52,9 @@
     <i class="material-icons">location_city</i>
     <input matInput formControlName="bairro" placeholder="Bairro" maxlength="50" required>
   </div>
-  <!-- ESTADO / UF -->
+
   <div class="input-container estadoUf">
     <div class="input-container">
-
       <!-- Estado -->
       <div class="input-container estado">
         <i class="material-icons">location_on</i>
@@ -70,10 +74,9 @@
       </div>
     </div>
   </div>
-  <!-- ENDEREÇO  FIM -->
 
-  <!-- Botão de Atualizar -->
-  <button class="registrar_botao btn" type="submit">Atualizar</button>
+  <!-- Botão de Registrar -->
+  <button class="registrar_botao btn" type="submit">Registrar</button>
 
 </form>
 
@@ -84,7 +87,7 @@
 <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
 
 <!-- Se houver mensagem de sucesso irá mandar para tela anterior, exibir em azul -->
-<div *ngIf="redirectMessage" class="alert alert-info">{{ redirectMessage }}</div>
+<div *ngIf="infoMessage" class="alert alert-info">{{ infoMessage }}</div>
 
-
-
+<!-- Mensagem de informação  -->
+<div *ngIf="limpaFormulario" class="alert alert-limpa">{{ limpaFormulario }}</div>
