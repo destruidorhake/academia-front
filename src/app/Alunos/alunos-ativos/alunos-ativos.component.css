@@ -94,11 +94,17 @@
 }
 
 
+
+
 .nome-column {
   width: 25%;
 }
 
-.cpf-column {
+.nascimento-column {
+  width: 15%;
+}
+
+.criacao-column {
   width: 15%;
 }
 
@@ -107,9 +113,11 @@
 }
 
 .endereco-column {
-  width: 30%;
+  width: 25%;
 }
 
-.dataCriacao-column {
-  width: 15%;
+.uf-column {
+  width: 5%;
 }
+
+

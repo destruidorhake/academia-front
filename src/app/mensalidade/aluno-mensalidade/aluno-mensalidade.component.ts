@@ -8,8 +8,8 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { Mensalidade } from '../../Alunos/models/aluno.model';
-import { AlunosService } from '../../Services/alunos.service';
+import { AlunosService } from '../../Services/Alunos.Service/alunos.service';
+import { Mensalidade } from '../../models/aluno.model';
 
 @Component({
   selector: 'app-aluno-mensalidade',
@@ -29,9 +29,8 @@ import { AlunosService } from '../../Services/alunos.service';
   styleUrl: './aluno-mensalidade.component.css'
 })
 export class AlunoMensalidadeComponent {
-
   dataSource = new MatTableDataSource<Mensalidade>();
-  displayedColumns: string[] = ['nome', 'cpf', 'dataVencimento', 'valor', 'status'];
+  displayedColumns: string[] = ['nome','dataVencimento', 'valor', 'status', 'actions'];
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
@@ -42,8 +41,6 @@ export class AlunoMensalidadeComponent {
 
   ngOnInit(): void {
     this.dataSource.paginator = this.paginator;
-
-    // Captura o ID do aluno da rota
     this.route.paramMap.subscribe(params => {
       const alunoId = +params.get('id')!;
       this.mensalidades(alunoId);
@@ -52,14 +49,13 @@ export class AlunoMensalidadeComponent {
 
   mensalidades(alunoId: number): void {
     this.alunosService.getMensalidades(alunoId).subscribe(data => {
-      console.log('IDs dos Alunos:', data.map(mensalidade => mensalidade.aluno.id));
-
-      // Filtra os dados pelo ID do aluno
+      console.log('Dados das Mensalidades:', data); // Verifique a estrutura dos dados retornados
       this.dataSource.data = data.filter(mensalidade => mensalidade.aluno.id === alunoId);
-
+      console.log('Dados filtrados:', this.dataSource.data); // Verifique os dados após o filtro
       this.dataSource.paginator?.firstPage();
     });
   }
+
 
   getStatusName(statusNumber: number): string {
     switch (statusNumber) {
@@ -75,18 +71,23 @@ export class AlunoMensalidadeComponent {
     this.searchInput.nativeElement.focus();
   }
 
+  formatDate(date: string): string {
+    const [year, month, day] = date.split('-');
+    return `${day}/${month}/${year}`;
+  }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
     if (filterValue) {
       this.dataSource.filter = filterValue;
       this.dataSource.filterPredicate = (data: Mensalidade, filter: string) => {
+        console.log('Objeto Mensalidade:', data); // Verifique a estrutura aqui
         const searchString = filter.toLowerCase();
         return (
           data.aluno.nome.toLowerCase().includes(searchString) ||
-          data.aluno.cpf.toLowerCase().includes(searchString) ||
-          data.dataVencimento.toLowerCase().includes(searchString) ||
+          this.formatDate(data.dataVencimento).includes(searchString) ||
           data.valor.toString().includes(searchString) ||
-          this.getStatusName(data.status).toLowerCase().includes(searchString) // Aqui usamos getStatusName
+          this.getStatusName(data.status).toLowerCase().includes(searchString)
         );
       };
     } else {
@@ -94,4 +95,18 @@ export class AlunoMensalidadeComponent {
     }
   }
 
+  // Função para atualizar o status de uma mensalidade
+  aprovarPagamento(id: number): void {
+    console.log(id + 'Este é o id do aluno?')
+    const novoStatus = 2; // Status para confirmar o pagamento
+    this.alunosService.updateStatus(id, novoStatus).subscribe(
+      response => {
+        console.log('Status atualizado com sucesso:', response);
+        this.ngOnInit();
+      },
+      error => {
+        console.error('Erro ao atualizar o status:', error);
+      }
+    );
+  }
 }

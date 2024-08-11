@@ -1,24 +1,29 @@
-import { RouterModule, Routes } from '@angular/router';
-import { AlunosComponent } from './Alunos/alunos.component';
-import { LoginComponent } from './login/login.component';
-import { RegistrarComponent } from './registrar/registrar.component';
-import { AuthGuard } from './Authentication/auth.guard';
-import { MensalidadeComponent } from './mensalidade/mensalidade.component';
-import { AlunosAtualizarComponent } from './Alunos/atualizar-aluno/atualizar-aluno.component';
-import { AlunosAtivosComponent } from './Alunos/alunos-ativos/alunos-ativos.component';
+import { Routes } from '@angular/router';
 import { AlunoMensalidadeComponent } from './mensalidade/aluno-mensalidade/aluno-mensalidade.component';
+import { RegistrarComponent } from './Alunos/registrar/registrar.component';
+import { AuthGuard } from './Usuarios/Authentication/auth.guard';
+import { LoginComponent } from './Usuarios/login/login.component';
+import { MensalidadesAlunosTotaisComponent } from './mensalidade/mensalidades-alunos-totais/mensalidades-alunos-totais.component';
+import { AlunosComponent } from './Alunos/Alunos/alunos.component';
+import { AlunosAtivosComponent } from './Alunos/alunos-ativos/alunos-ativos.component';
+import { AlunosAtualizarComponent } from './Alunos/atualizar-aluno/atualizar-aluno.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'registrar', component: RegistrarComponent, canActivate: [AuthGuard] },
-  { path: 'mensalidade', component: MensalidadeComponent, canActivate: [AuthGuard] },
-  { path: 'alunos', component: AlunosComponent, canActivate: [AuthGuard] },
-  { path: 'ativos', component: AlunosAtivosComponent, canActivate: [AuthGuard] },
-  { path: 'aluno/mensalidade/:id', component: AlunoMensalidadeComponent, canActivate: [AuthGuard] },
-  { path: 'mensalidade/:id', component: MensalidadeComponent, canActivate: [AuthGuard] },
-  { path: 'atualizar/:id', component: AlunosAtualizarComponent, canActivate: [AuthGuard] },
-
+  {
+    path: 'search',
+    canActivate: [AuthGuard],
+    data: { allowedUserTypes: ['alunos'] },
+    children: [
+      { path: '', component: AlunosComponent },
+      { path: 'registrar', component: RegistrarComponent },
+      { path: 'ativos', component: AlunosAtivosComponent },
+      { path: 'mensalidade/:id', component: AlunoMensalidadeComponent },
+      { path: 'mensalidades', component: MensalidadesAlunosTotaisComponent },
+      { path: 'atualizar/:id', component: AlunosAtualizarComponent },
+      { path: '**', component: LoginComponent }
+    ]
+  },
+  { path: '**', redirectTo: 'login' }
 ];
-
-export const routing = RouterModule.forRoot(routes);

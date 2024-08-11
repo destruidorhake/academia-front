@@ -5,58 +5,80 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatSelectionList, MatListModule } from '@angular/material/list';
+import { MatMenuTrigger, MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
-import { AlunosService } from '../../Services/alunos.service';
-import { RegistrarAluno } from '../models/aluno.model';
-import { AuthService } from '../../Authentication/auth.service';
+import { UdpateAlunoDTO } from '../../models/alunos.model';
+import { ESTADOS, UFS } from '../../models/estados-ufs.model';
+import { AlunosService } from '../../Services/Alunos.Service/alunos.service';
 
 @Component({
   selector: 'app-alunos-atualizado',
   standalone: true,
-  imports: [RouterModule,CommonModule, FormsModule,ReactiveFormsModule, MatButtonModule,MatFormFieldModule, MatIconModule, MatIconModule,NgxMaskDirective, NgxMaskPipe],
+  imports: [
+    MatChipsModule,
+    RouterModule,
+    CommonModule,
+    MatMenuTrigger,
+    FormsModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatSelectModule,
+    NgxMaskDirective,
+    NgxMaskPipe,
+    MatTooltipModule,
+    MatMenuModule,
+    MatSelectionList,
+    MatListModule
+  ],
   templateUrl: './atualizar-aluno.component.html',
   styleUrl: './atualizar-aluno.component.css'
 })
 export class AlunosAtualizarComponent {
-  alunoForm: FormGroup;
+  alunoForm!: FormGroup;
   errorMessage: string = '';
   successMessage: string = '';
+  redirectMessage: string = '';
   alunoId: number = 0;
+
+  estados = ESTADOS;
+  ufs = UFS;
 
   constructor(
     private fb: FormBuilder,
     private alunosService: AlunosService,
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthService
-  ) {
-    this.alunoForm = this.fb.group({
-      nome: ['', Validators.required],
-      cpf: ['', Validators.required],
-      telefone: ['', Validators.required],
-      cep: ['', Validators.required],
-      logradouro: ['', Validators.required],
-      bairro: ['', Validators.required],
-      estado: ['', Validators.required],
-      uf: ['', Validators.required]
-    });
-  }
+  ) {}
 
-  ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      this.alunoId = Number(params.get('id'));
-      if (this.alunoId) {
-        this.carregarAluno(this.alunoId);
-      }
+  ngOnInit(): void {
+    this.alunoId = Number(this.route.snapshot.paramMap.get('id'));
+
+    this.alunoForm = this.fb.group({
+      nome: ['', [Validators.required]],
+      dataNascimento: ['', [Validators.required]],
+      telefone: ['', [Validators.required]],
+      cep: ['', [Validators.required]],
+      logradouro: ['', [Validators.required]],
+      bairro: ['', [Validators.required]],
+      estado: ['', [Validators.required]],
+      uf: ['', [Validators.required]]
     });
+
+    this.carregarAluno(this.alunoId);
   }
 
   carregarAluno(id: number): void {
-    this.alunosService.getAlunoById(id).subscribe(
-      (aluno: RegistrarAluno) => {
+    this.alunosService.getAlunoById(id).subscribe({
+      next: (aluno) => {
         this.alunoForm.patchValue({
           nome: aluno.nome,
-          cpf: aluno.cpf,
+          dataNascimento: aluno.dataNascimento,
           telefone: aluno.telefone,
           cep: aluno.endereco.cep,
           logradouro: aluno.endereco.logradouro,
@@ -65,45 +87,64 @@ export class AlunosAtualizarComponent {
           uf: aluno.endereco.uf
         });
       },
-      (error) => {
-        console.error('Erro ao carregar aluno:', error);
-        this.errorMessage = 'Erro ao carregar aluno. Verifique o console para mais detalhes.';
+      error: (err) => {
+        this.errorMessage = 'Erro ao carregar dados do aluno. Tente novamente mais tarde!';
+        console.error('Erro ao carregar aluno:', err);
       }
-    );
+    });
   }
 
   atualizarAluno(): void {
     if (this.alunoForm.valid) {
-      const alunoAtualizado: RegistrarAluno = {
-        nome: this.alunoForm.value.nome,
-        cpf: this.alunoForm.value.cpf,
-        telefone: this.alunoForm.value.telefone,
+      const formValues = this.alunoForm.value;
+
+      const alunoData: UdpateAlunoDTO = {
+        id: this.alunoId,
+        nome: formValues.nome,
+        dataNascimento: formValues.dataNascimento,
+        telefone: formValues.telefone,
         endereco: {
-          cep: this.alunoForm.value.cep,
-          logradouro: this.alunoForm.value.logradouro,
-          bairro: this.alunoForm.value.bairro,
-          estado: this.alunoForm.value.estado,
-          uf: this.alunoForm.value.uf
-        }
+          cep: formValues.cep,
+          logradouro: formValues.logradouro,
+          bairro: formValues.bairro,
+          estado: formValues.estado,
+          uf: formValues.uf
+        },
+        ativo: 'ativo',
+        dataCriacao: '2024-01-01T00:00:00Z',
       };
 
-      this.alunosService.atualizarAluno(this.alunoId, alunoAtualizado).subscribe(
-        () => {
-          console.log('Aluno atualizado com sucesso!');
-          this.successMessage = 'Aluno atualizado com sucesso! Redirecionando página em 5 segundos...';
-          this.errorMessage = '';
-          setTimeout(() => {
-            this.router.navigate([`/alunos`]);
-          }, 5000);
+      this.alunosService.updateAluno(this.alunoId, alunoData).subscribe({
+        next: () => {
+          this.successMessage = 'Aluno atualizado com sucesso!';
+          this.redirectMessage = 'Redirecionado para página anterior!';
+          this.clearMessagesAfterDelay(3000, () => {
+            this.router.navigate(['/search']);
+          });
         },
-        (error) => {
-          console.error('Erro ao atualizar aluno:', error);
-          this.errorMessage = 'Erro ao atualizar aluno. Verifique o console para mais detalhes.';
+        error: (err) => {
+          if (err.status === 400) {
+            this.errorMessage = 'Dados inválidos. Por favor, verifique os campos e tente novamente!';
+          } else {
+            this.errorMessage = 'Erro ao atualizar aluno. Tente novamente mais tarde!';
+          }
+          this.clearMessagesAfterDelay(5000);
         }
-      );
-      } else {
-        console.error('Formulário inválido. Verifique os campos.');
-        this.errorMessage = 'Formulário inválido. Verifique os campos.';
+      });
+    } else {
+      this.errorMessage = 'Por favor, preencha todos os campos corretamente!';
+      this.clearMessagesAfterDelay(0);
+    }
+  }
+
+  private clearMessagesAfterDelay(delay: number, callback?: () => void): void {
+    setTimeout(() => {
+      this.errorMessage = '';
+      this.successMessage = '';
+      this.redirectMessage = '';
+      if (callback) {
+        callback();
       }
+    }, delay);
   }
 }

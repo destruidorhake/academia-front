@@ -2,40 +2,35 @@
   <div class="container">
     <div class="screen">
       <div class="screen__content">
-        <!-- título -->
         <header>
           <h3 class="loginHeader">User Login</h3>
         </header>
-
-        <!-- Formulário de Login -->
         <form class="login" (ngSubmit)="onLogin()" autocomplete="off">
-
-          <!-- Nome de usuário -->
           <div class="input-field login-senha">
             <i class="material-icons prefix">person</i>
             <input class="custom-input" type="text" placeholder="E-mail" id="username" name="username"
-              [(ngModel)]="username" required autocomplete="new-password" (focus)="disableAutocomplete()">
+              [(ngModel)]="email" required autocomplete="off">
           </div>
-
           <div class="input-field login-senha">
             <i class="material-icons prefix">lock</i>
             <input class="custom-input" type="password" placeholder="Senha" id="password" name="password"
-              [(ngModel)]="password" required autocomplete="new-password" (focus)="disableAutocomplete()">
+              [(ngModel)]="password" required autocomplete="off">
           </div>
-
-          <!-- Botão realizar login -->
-          <button class="btn login_botao" type="submit" (click)="onLogin()">
+          <button class="btn login_botao" type="submit">
             <p>Logar</p>
           </button>
-
           <h6 class="copy">Luis Vanique & Gustavo Gomes - Copyright</h6>
         </form>
-        <script>
-          function disableAutocomplete() {
-            document.getElementById('password').setAttribute('autocomplete', 'new-password');
-          }
-        </script>
       </div>
     </div>
   </div>
 </div>
+
+<!-- Se houver mensagem de erro, exibir em vermelho -->
+<div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+<!-- Se houver informações invalidades, exibir em amarelo -->
+<div *ngIf="infoMessage" class="alert alert-info">{{ infoMessage }}</div>
+
+
+

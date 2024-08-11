@@ -4,3 +4,43 @@
   margin: 0 4px;
   opacity: 0;
 }
+
+.mat-mdc-dialog-container {
+  width: 100%;
+  height: 100%;
+  display: block;
+  box-sizing: border-box;
+  max-height: inherit;
+  min-height: inherit;
+  min-width: inherit;
+  max-width: inherit;
+  outline: 0;
+  margin-left: 45vw;
+  margin-top: -86vh;
+}
+
+.mdc-dialog--open .mat-mdc-dialog-surface, .mdc-dialog--closing .mat-mdc-dialog-surface {
+  transform: none;
+  width: auto;
+  max-width: 15dvw;
+  z-index: 5;
+}
+
+div.mat-mdc-select-panel {
+  width: 10dvw;
+  max-height: 20dvh;
+  outline: 0;
+  overflow: auto;
+  padding: 0% 0;
+  border-radius: 0%;
+  border: 1px solid black;
+  box-sizing: border-box;
+  position: absolute;
+  background-color: white;
+  margin-left: 37.5dvw;
+  margin-top: -7dvh;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
