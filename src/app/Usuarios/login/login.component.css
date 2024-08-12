@@ -67,15 +67,17 @@ input:-webkit-autofill:active {
 }
 
 .login_botao {
-    margin-right: auto;
-    margin-left: auto;
-    margin-top: 1.8vw;
-    text-transform: uppercase;
-    font-weight: 700;
-    display: flex;
-    width: auto;
-    background-color: rgb(0, 174, 255);
-    transition: background-color 0.3s ease;
+  padding-right: 1dvw;
+  padding-left: 1dvw;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 1.8vw;
+  text-transform: uppercase;
+  font-weight: 700;
+  display: flex;
+  width: auto;
+  background-color: rgb(0, 174, 255);
+  transition: background-color 0.3s ease;
 }
 
 .login_botao:hover {

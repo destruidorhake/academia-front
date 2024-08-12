@@ -17,9 +17,11 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AuthService } from './Usuarios/Authentication/auth.service';
 import { customInterceptor } from './Usuarios/interceptor/custom.interceptor';
+import { CookieService } from 'ngx-cookie-service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    CookieService,
     AuthService,
     AlunosService,
     CommonModule,

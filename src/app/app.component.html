@@ -1,8 +1,5 @@
-<ng-container *ngIf="isLoggedIn()">
-  <!-- <app-navbar></app-navbar> -->
-  <app-side-bar></app-side-bar>
 
-</ng-container>
-
+<!-- <app-navbar></app-navbar> -->
+<app-side-bar *ngIf="showNavbar"></app-side-bar>
 
 <router-outlet></router-outlet>

@@ -1,13 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatIconButton, MatIconAnchor, MatButtonModule } from '@angular/material/button';
 import { MatOptionModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
-import { NavigationEnd, Router, RouterModule } from '@angular/router';
+import { NavigationEnd, Router, RouterModule, Event } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AuthService } from '../../Usuarios/Authentication/auth.service';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-side-bar',
@@ -27,31 +28,29 @@ import { AuthService } from '../../Usuarios/Authentication/auth.service';
   styleUrl: './side-bar.component.css'
 })
 export class SideBarComponent implements OnInit  {
-
   showNavbar: boolean = false;
 
-  constructor(private router: Router, public authService: AuthService) {
-
-    CUSTOM_ELEMENTS_SCHEMA
-
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        this.showNavbar = this.shouldShowNavbar(event.urlAfterRedirects);
-      }
+  constructor(private router: Router, private authService: AuthService) {
+    // Subscribe to router events to dynamically control sidebar visibility
+    this.router.events.pipe(
+      filter((event: Event): event is NavigationEnd => event instanceof NavigationEnd)
+    ).subscribe((event: NavigationEnd) => {
+      this.showNavbar = this.shouldShowNavbar(event.urlAfterRedirects);
     });
   }
 
-  // METODO PARA EVITAR MOSTRAR A SIDEBAR NAS TELAS
+  // MÉTODO PARA VERIFICAR SE DEVE MOSTRAR A SIDEBAR
   shouldShowNavbar(url: string): boolean {
-    return this.authService.isLoggedIn() && !url.includes('/login');
+    return !url.includes('/login') && this.authService.isLoggedIn();
   }
 
-  // METODO PARA INICIALIZAR
+  // MÉTODO PARA INICIALIZAR
   ngOnInit(): void {
-    this.showNavbar = true;
+    // Atualiza a visibilidade da sidebar ao iniciar
+    this.showNavbar = this.shouldShowNavbar(this.router.url);
   }
 
-  // METODO PARA SAIR
+  // MÉTODO PARA SAIR
   logout() {
     localStorage.clear();
     sessionStorage.clear();
@@ -66,5 +65,4 @@ export class SideBarComponent implements OnInit  {
       window.location.reload();
     });
   }
-
 }

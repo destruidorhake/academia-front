@@ -7,6 +7,7 @@ import { MensalidadesAlunosTotaisComponent } from './mensalidade/mensalidades-al
 import { AlunosComponent } from './Alunos/Alunos/alunos.component';
 import { AlunosAtivosComponent } from './Alunos/alunos-ativos/alunos-ativos.component';
 import { AlunosAtualizarComponent } from './Alunos/atualizar-aluno/atualizar-aluno.component';
+import { AppComponent } from './app.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
