@@ -2,19 +2,20 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { tap, catchError, of, Observable, map } from 'rxjs';
+import { environment } from '../../Services/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private tokenKey = 'authToken';
-  private apiUrl = 'http://localhost:8080/login'; // Ajuste para o URL do seu backend
+  private apiUrl = environment.local;
 
   constructor(private http: HttpClient, private router: Router) { }
 
    // Método para realizar login
    login(email: string, password: string): Observable<boolean> {
-    return this.http.post<{ token: string }>(this.apiUrl, { email, password }).pipe(
+    return this.http.post<{ token: string }>(this.apiUrl + '/login', { email, password }).pipe(
       map(response => {
         if (response.token) {
           this.storeToken(response.token);
