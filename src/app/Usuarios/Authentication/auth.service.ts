@@ -13,8 +13,8 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-   // Método para realizar login
-   login(email: string, password: string): Observable<boolean> {
+  // Método para realizar login
+  login(email: string, password: string): Observable<boolean> {
     return this.http.post<{ token: string }>(this.apiUrl + '/login', { email, password }).pipe(
       map(response => {
         if (response.token) {
@@ -29,17 +29,36 @@ export class AuthService {
   }
 
   private storeToken(token: string): void {
-    localStorage.setItem(this.tokenKey, token);
+    if (this.isLocalStorageAvailable()) {
+      localStorage.setItem(this.tokenKey, token);
+    }
   }
 
   // Verifica se o usuário está logado
   isLoggedIn(): boolean {
-    return !!localStorage.getItem(this.tokenKey);
+    if (this.isLocalStorageAvailable()) {
+      return !!localStorage.getItem(this.tokenKey);
+    }
+    return false;
   }
 
   // Faz o logout do usuário
   logout(): void {
-    localStorage.removeItem(this.tokenKey);
+    if (this.isLocalStorageAvailable()) {
+      localStorage.removeItem(this.tokenKey);
+    }
     this.router.navigate(['/login']);
+  }
+
+  // Método para verificar se localStorage está disponível
+  private isLocalStorageAvailable(): boolean {
+    try {
+      const test = 'test';
+      localStorage.setItem(test, test);
+      localStorage.removeItem(test);
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 }
