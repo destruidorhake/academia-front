@@ -27,6 +27,7 @@
     "angular-input-masks": "^4.4.1",
     "express": "^4.18.2",
     "materialize-css": "^1.0.0-rc.2",
+    "ngx-cookie-service": "^18.0.0",
     "ngx-mask": "^18.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

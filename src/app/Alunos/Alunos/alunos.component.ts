@@ -80,14 +80,12 @@ export class AlunosComponent implements OnInit {
 
   navigateToMensalidade(id: number) {
     this.router.navigate(['/search/mensalidade', id]);
-    console.log(id);
   }
 
   carregarAlunos() {
     this.alunosService.getAlunos().subscribe(
       (data: AlunosResponse) => {
         this.dataSource.data = data.content;
-        console.log(data.content);
       },
       (error) => {
         console.error('Erro ao carregar alunos:', error);
@@ -96,27 +94,23 @@ export class AlunosComponent implements OnInit {
   }
 
   ativarAluno(id: number) {
-    console.log(`Ativando aluno com ID: ${id}`);
     this.alunosService.reativarAluno(id).subscribe(
       () => {
-        console.log(`Aluno com ID ${id} ativado com sucesso.`);
         this.carregarAlunos();
       },
       (error) => {
-        console.error(`Erro ao ativar aluno com ID ${id}:`, error);
+        console.error(error);
       }
     );
   }
 
   desativaAluno(id: number) {
-    console.log(`Desativando aluno com ID: ${id}`);
     this.alunosService.desativarAluno(id).subscribe(
       () => {
-        console.log(`Aluno com ID ${id} desativado com sucesso.`);
         this.carregarAlunos();
       },
       (error) => {
-        console.error(`Erro ao desativar aluno com ID ${id}:`, error);
+        console.error(error);
       }
     );
   }
@@ -134,8 +128,6 @@ export class AlunosComponent implements OnInit {
 
       if (result) {
         this.desativaAluno(alunoId);
-      } else {
-        console.log('Ação cancelada!');
       }
     });
     dialogRef.componentInstance?.resetButtonFocus();

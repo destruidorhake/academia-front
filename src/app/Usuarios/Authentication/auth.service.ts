@@ -1,8 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { tap, catchError, of, Observable, map } from 'rxjs';
 import { environment } from '../../Services/environment';
+import { CookieService } from 'ngx-cookie-service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,17 +15,14 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  // Método para realizar login
   login(email: string, password: string): Observable<boolean> {
-    return this.http.post<{ token: string }>(this.apiUrl + '/login', { email, password }).pipe(
-      map(response => {
+    return this.http.post<{ token: string }>(`${this.apiUrl}/login`, { email, password }).pipe(
+      tap(response => {
         if (response.token) {
           this.storeToken(response.token);
-          return true;
-        } else {
-          return false;
         }
       }),
+      map(response => !!response.token),
       catchError(() => of(false))
     );
   }
@@ -34,15 +33,14 @@ export class AuthService {
     }
   }
 
-  // Verifica se o usuário está logado
-  isLoggedIn(): boolean {
-    if (this.isLocalStorageAvailable()) {
-      return !!localStorage.getItem(this.tokenKey);
-    }
-    return false;
+  getToken(): string | null {
+    return this.isLocalStorageAvailable() ? localStorage.getItem(this.tokenKey) : null;
   }
 
-  // Faz o logout do usuário
+  isLoggedIn(): boolean {
+    return !!this.getToken();
+  }
+
   logout(): void {
     if (this.isLocalStorageAvailable()) {
       localStorage.removeItem(this.tokenKey);
@@ -50,7 +48,6 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
-  // Método para verificar se localStorage está disponível
   private isLocalStorageAvailable(): boolean {
     try {
       const test = 'test';

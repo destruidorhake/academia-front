@@ -49,9 +49,7 @@ export class AlunoMensalidadeComponent {
 
   mensalidades(alunoId: number): void {
     this.alunosService.getMensalidades(alunoId).subscribe(data => {
-      console.log('Dados das Mensalidades:', data); // Verifique a estrutura dos dados retornados
       this.dataSource.data = data.filter(mensalidade => mensalidade.aluno.id === alunoId);
-      console.log('Dados filtrados:', this.dataSource.data); // Verifique os dados após o filtro
       this.dataSource.paginator?.firstPage();
     });
   }
@@ -81,7 +79,6 @@ export class AlunoMensalidadeComponent {
     if (filterValue) {
       this.dataSource.filter = filterValue;
       this.dataSource.filterPredicate = (data: Mensalidade, filter: string) => {
-        console.log('Objeto Mensalidade:', data); // Verifique a estrutura aqui
         const searchString = filter.toLowerCase();
         return (
           data.aluno.nome.toLowerCase().includes(searchString) ||
@@ -97,15 +94,14 @@ export class AlunoMensalidadeComponent {
 
   // Função para atualizar o status de uma mensalidade
   aprovarPagamento(id: number): void {
-    console.log(id + 'Este é o id do aluno?')
     const novoStatus = 2; // Status para confirmar o pagamento
     this.alunosService.updateStatus(id, novoStatus).subscribe(
       response => {
-        console.log('Status atualizado com sucesso:', response);
+        console.log(response);
         this.ngOnInit();
       },
       error => {
-        console.error('Erro ao atualizar o status:', error);
+        console.error(error);
       }
     );
   }
