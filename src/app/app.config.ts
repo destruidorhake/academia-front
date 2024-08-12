@@ -6,7 +6,7 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -16,6 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AuthService } from './Usuarios/Authentication/auth.service';
+import { customInterceptor } from './Usuarios/interceptor/custom.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -29,10 +30,10 @@ export const appConfig: ApplicationConfig = {
     NgxMaskDirective,
     NgxMaskPipe,
     provideNgxMask(),
-    provideHttpClient(withFetch()),
+    provideHttpClient(withFetch(), withInterceptors([customInterceptor])),
     importProvidersFrom(BrowserModule, MatTableModule, MatButtonModule, MatSelectModule, BrowserAnimationsModule),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideClientHydration(),
-    provideRouter(routes),
+    provideRouter(routes)
   ]
 };

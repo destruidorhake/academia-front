@@ -9,12 +9,12 @@
           <div class="input-field login-senha">
             <i class="material-icons prefix">person</i>
             <input class="custom-input" type="text" placeholder="E-mail" id="username" name="username"
-              [(ngModel)]="email" required autocomplete="off">
+              [(ngModel)]="email" required>
           </div>
           <div class="input-field login-senha">
             <i class="material-icons prefix">lock</i>
             <input class="custom-input" type="password" placeholder="Senha" id="password" name="password"
-              [(ngModel)]="password" required autocomplete="off">
+              [(ngModel)]="password" required>
           </div>
           <button class="btn login_botao" type="submit">
             <p>Logar</p>
@@ -29,8 +29,5 @@
 <!-- Se houver mensagem de erro, exibir em vermelho -->
 <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
 
-<!-- Se houver informações invalidades, exibir em amarelo -->
+<!-- Se houver informações invalidadas, exibir em amarelo -->
 <div *ngIf="infoMessage" class="alert alert-info">{{ infoMessage }}</div>
-
-
-

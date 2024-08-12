@@ -21,7 +21,6 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  // METODO INICIAL DO COMPONENTE
   ngOnInit(): void {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
@@ -30,29 +29,36 @@ export class LoginComponent {
           this.resetToLogin();
         }
       });
+
+    this.disableAutocomplete(); // Desabilitar autocomplete ao inicializar
   }
 
-  // METODO PARA LIMPAR CACHE E RESETAR O SITE
   resetToLogin(): void {
     this.router.navigateByUrl('/login', { replaceUrl: true }).then(() => {
       window.location.reload();
     });
   }
 
-  // METODO PARA DESABILITAR AUTO COMPLETE DO ANGULAR NAS PAGINAS
-  disableAutocomplete() {
-    const inputField = document.getElementById('password') as HTMLInputElement;
-    if (inputField) {
-      inputField.setAttribute('autocomplete', 'new-password');
+  disableAutocomplete(): void {
+    const passwordField = document.getElementById('password') as HTMLInputElement;
+    const emailField = document.getElementById('username') as HTMLInputElement;
+
+    if (passwordField) {
+      passwordField.setAttribute('autocomplete', 'new-password');
+    }
+
+    if (emailField) {
+      emailField.setAttribute('autocomplete', 'off');
     }
   }
 
-  // MÉTODO PARA REALIZAR LOGIN
   onLogin(): void {
     this.authService.login(this.email, this.password).subscribe({
       next: (success: boolean) => {
         if (success) {
-          this.router.navigate(['/search']);  // Redirecionar para a página inicial ou dashboard
+          // Armazenar o token no localStorage
+          const token = this.authService.getToken();
+          this.router.navigate(['/search']);  // Redirecionar para a página inicial
         } else {
           this.infoMessage = 'Login falhou. Verifique suas credenciais!';
           this.loginError = true;
