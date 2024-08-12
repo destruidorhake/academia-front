@@ -7,6 +7,7 @@ import { MatTableModule } from '@angular/material/table';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { AuthService } from '../../Usuarios/Authentication/auth.service';
 
 @Component({
   selector: 'app-side-bar',
@@ -29,7 +30,8 @@ export class SideBarComponent implements OnInit  {
 
   showNavbar: boolean = false;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, public authService: AuthService) {
+
     CUSTOM_ELEMENTS_SCHEMA
 
     this.router.events.subscribe((event) => {
@@ -41,7 +43,7 @@ export class SideBarComponent implements OnInit  {
 
   // METODO PARA EVITAR MOSTRAR A SIDEBAR NAS TELAS
   shouldShowNavbar(url: string): boolean {
-    return !url.includes('/login');
+    return this.authService.isLoggedIn() && !url.includes('/login');
   }
 
   // METODO PARA INICIALIZAR
