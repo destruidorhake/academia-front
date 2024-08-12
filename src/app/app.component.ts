@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NavBarComponent } from './Navegacao/nav-bar/nav-bar.component';
 import { SideBarComponent } from './Navegacao/side-bar/side-bar.component';
@@ -19,8 +19,8 @@ export class AppComponent {
   }
 
   // METODO VERIFICAR SEURANÇA E LOGIN DO SITE
-  public getAuthService(): AuthService {
-    return this.authService;
+  public isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
   }
 
 
