@@ -1,4 +1,4 @@
 export const environment = {
-  production: false,
-  local: 'http://localhost:8080'
+  production: true,
+  local: 'https://academia-backend-production-a5af.up.railway.app/'
 };
