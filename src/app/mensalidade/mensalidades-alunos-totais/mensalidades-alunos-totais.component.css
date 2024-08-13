@@ -1,66 +1,64 @@
-.loginHeader{
-  max-width: 85vw;
-  margin-left: 20vw;
-  margin-right: 5vw;
-  padding-top: 1vh;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-.custom-table {
-    width: 75vw;
-    max-width: 85vw;
-    margin-top: 3vh;
-    margin-left: 20vw;
-    margin-right: 5vw;
-    background-color: rgb(250, 250, 250);
-    border-radius: 0.5rem;
-    border: 1px solid #ccc;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: flexbox;
-    height: auto;
-  }
-
-.mat-mdc-header-cell {
-  background: rgb(228, 228, 228);
-  border-bottom-color: var(--mat-table-row-item-outline-color, rgba(0, 0, 0, 0.12));
-  border-bottom-width: var(--mat-table-row-item-outline-width, 1px);
-  border-bottom-style: solid;
-  letter-spacing: var(--mat-table-header-headline-tracking);
-  font-weight: bold;
-  line-height: inherit;
+/* Estilo para o container principal da página */
+.main-content {
+  margin-left: 5dvw;
+  margin-right: 5dvw;
+  min-height: fit-content;
+  height: auto;
+  max-height: max-content;
   box-sizing: border-box;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  outline: none;
-  text-align: left;
-  text-transform: uppercase;
 }
 
+/* Ajustes no título */
+.loginHeader {
+  width: 100%;
+  margin-top: 5dvh;
+  font-weight: bold;
+  font-size: 300%;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+/* Ajustes no campo de pesquisa */
+.pesquisar {
+  display: flex;
+  gap: 1dvh;
+  align-items: center;
+  padding-bottom: 1vh;
+  width: 100%;
+}
+
+/* Estilo para a coluna */
 .mat-mdc-row {
   background-color: #fff;
-  color: #666;
+  color: #444;
 }
 
-.pesquisar {
-  margin-bottom: 20px;
-  width: 75vw;
-  max-width: 75vw;
-  margin-left: 20vw;
-  margin-right: 5vw;
+tr {
+  border-bottom: 0.1px solid rgb(104, 104, 104);
 }
 
-.input-field {
-  position: relative;
-  margin-top: 8px;
-  margin-bottom: 0;
-  font-size: 1rem;
-  line-height: 1.5;
+/* Estilo para a tabela */
+.custom-table {
+  width: 100%;
+  margin: 3vh auto;
+  background-color: rgb(250, 250, 250);
+  border: 0.1px solid #dfdfdf;
 }
 
+/* Estilo para a tabela */
 .paginator {
-  display: flex;
-  justify-content: right;
+  width: 100%;
+}
+
+/* Títulos */
+.mat-header-cell {
+  font-weight: bolder;
+  text-transform: uppercase;
+}
+
+.mat-mdc-header-cell {
+  font-weight: bolder;
+  text-transform: uppercase;
 }
 
 .nome-column {
@@ -83,3 +81,4 @@
   width: 15%;
   justify-content: center;
 }
+

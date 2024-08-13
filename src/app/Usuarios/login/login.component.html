@@ -3,22 +3,20 @@
     <div class="screen">
       <div class="screen__content">
         <header>
-          <h3 class="loginHeader">User Login</h3>
+          <h3 class="loginHeader">Login</h3>
         </header>
         <form class="login" (ngSubmit)="onLogin()" autocomplete="off">
           <div class="input-field login-senha">
             <i class="material-icons prefix">person</i>
             <input class="custom-input" type="text" placeholder="E-mail" id="username" name="username"
-              [(ngModel)]="email" required>
+              [(ngModel)]="email" required autocomplete="off">
           </div>
           <div class="input-field login-senha">
             <i class="material-icons prefix">lock</i>
             <input class="custom-input" type="password" placeholder="Senha" id="password" name="password"
-              [(ngModel)]="password" required>
+              [(ngModel)]="password" required autocomplete="off">
           </div>
-          <button class="btn login_botao" type="submit">
-            <p>Logar</p>
-          </button>
+          <button class="login_botao" type="submit">Logar</button>
           <h6 class="copy">Luis Vanique & Gustavo Gomes - Copyright</h6>
         </form>
       </div>
@@ -29,5 +27,5 @@
 <!-- Se houver mensagem de erro, exibir em vermelho -->
 <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
 
-<!-- Se houver informações invalidadas, exibir em amarelo -->
+<!-- Se houver informações invalidas, exibir em amarelo -->
 <div *ngIf="infoMessage" class="alert alert-info">{{ infoMessage }}</div>

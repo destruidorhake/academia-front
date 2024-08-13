@@ -9,25 +9,25 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AuthService } from '../../Usuarios/Authentication/auth.service';
 import { filter } from 'rxjs';
+import { MatListModule } from '@angular/material/list';
 
 @Component({
   selector: 'app-side-bar',
   standalone: true,
   imports: [
-    RouterModule,
     CommonModule,
-    MatOptionModule,
-    MatTableModule,
-    MatIconModule,
-    MatIconButton,
-    MatIconAnchor,
     MatButtonModule,
+    MatIconModule,
     MatSidenavModule,
-    MatToolbarModule],
+    MatListModule,
+    MatToolbarModule,
+    RouterModule
+  ],
   templateUrl: './side-bar.component.html',
   styleUrl: './side-bar.component.css'
 })
 export class SideBarComponent implements OnInit  {
+  isSidebarOpen: boolean = true;
   showNavbar: boolean = false;
 
   constructor(private router: Router, private authService: AuthService) {
@@ -37,6 +37,11 @@ export class SideBarComponent implements OnInit  {
     ).subscribe((event: NavigationEnd) => {
       this.showNavbar = this.shouldShowNavbar(event.urlAfterRedirects);
     });
+  }
+
+  // MÉTODO PARA SIDEBAR EM CELULARES
+  toggleSidebar() {
+    this.isSidebarOpen = !this.isSidebarOpen;
   }
 
   // MÉTODO PARA VERIFICAR SE DEVE MOSTRAR A SIDEBAR

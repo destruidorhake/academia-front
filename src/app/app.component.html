@@ -1,5 +1,10 @@
+<!-- Estrutura principal -->
+<div class="main-container">
+  <!-- <app-navbar></app-navbar> -->
+  <app-side-bar *ngIf="showNavbar"></app-side-bar>
 
-<!-- <app-navbar></app-navbar> -->
-<app-side-bar *ngIf="showNavbar"></app-side-bar>
-
-<router-outlet></router-outlet>
+  <!-- Conteúdo principal que usa a sidebar -->
+  <div class="main-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

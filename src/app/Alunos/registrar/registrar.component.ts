@@ -135,4 +135,23 @@ export class RegistrarComponent {
     }, 5000);
   }
 
+  onCepChange(): void {
+    const cep = this.alunoForm.get('cep')?.value;
+    if (cep) {
+      this.alunosService.buscarEnderecoPorCep(cep).subscribe({
+        next: (endereco) => {
+          this.alunoForm.patchValue({
+            logradouro: endereco.logradouro,
+            bairro: endereco.bairro,
+            estado: endereco.localidade,
+            uf: endereco.uf
+          });
+        },
+        error: (err) => {
+          console.error('Erro ao buscar endereço:', err);
+        }
+      });
+    }
+  }
+
 }

@@ -1,29 +1,92 @@
-.formulario {
-  display: flex;
-  flex-direction: column;
-  max-width: 30vw;
-  width: 30vw;
-  margin-left: 20vw;
-  margin-right: 5vw;
-  padding: 20px;
-  background-color: #fafafa;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  align-items: left;
+/* Estilo para o container principal da página */
+.main-content {
+  margin-left: 5dvw;
+  margin-right: 5dvw;
+  min-height: fit-content;
+  height: auto;
+  max-height: max-content;
+  box-sizing: border-box;
 }
 
+.formulario {
+  padding: 2%;
+  display: flex;
+  flex-direction: column;
+  max-width: 40%;
+  width: 100%;
+  background-color: #fafafa;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.478);
+}
+
+/* Ajustes no título */
 .loginHeader {
-  max-width: 85vw;
-  margin-left: 20vw;
-  margin-right: 5vw;
-  padding-top: 1vh;
+  width: 100%;
+  margin-top: 5dvh;
   font-weight: bold;
+  font-size: 300%;
   text-transform: uppercase;
+  text-align: left;
+}
+
+.mat-icon {
+  background-color: black;
+}
+
+.input-container {
+  display: flex;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.input-container i.material-icons {
+  margin-right: 2%;
+}
+
+.input-container input {
+  text-transform: capitalize;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #fafafa inset !important;
+    -webkit-text-fill-color: #000 !important;
+}
+
+.label {
+  margin-left: 11.5%;
+  text-transform: uppercase;
+  color: #000;
+  margin-top: 1dvh;
+}
+
+.estadoUf {
+  gap: 1dvw;
+  display: flex;
+  width: 90%;
+  justify-content: space-between;
+}
+
+.uf {
+  width: 55%;
+  text-align: right;
+}
+
+.estado {
+  width: 55;
+  text-align: right;
+}
+
+tr {
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 .registrar_botao {
-  margin-top: 2dvh;
+  margin-top: 3dvh;
   margin-right: auto;
   margin-left: auto;
   text-transform: uppercase;
@@ -87,63 +150,4 @@
   border: 0.5px solid;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.438);
-}
-
-.mat-icon {
-  background-color: black;
-}
-
-.input-container {
-  display: flex;
-  align-items: center;
-  width: 85%;
-  margin-left: 7.5%;
-}
-
-.input-container i.material-icons {
-  margin-right: 0.7vw;
-}
-
-.mat-form-field {
-  width: 100%;
-  margin-bottom: auto;
-}
-
-.input-container input {
-  text-transform: capitalize;
-}
-
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px #fafafa inset !important;
-    -webkit-text-fill-color: #000 !important;
-}
-
-.label {
-  margin-left: 4dvw;
-  color: #000;
-  margin-top: 1dvh;
-}
-
-.estadoUf {
-  margin-top: 2dvh;
-}
-
-.label-estado {
-  width: 18dvw;
-}
-
-.label-uf {
-  width: 20dvw;
-}
-
-.estado{
-  margin-left: -1.8dvw;
-  width: 70%;
-}
-
-.uf{
-  width: 40%;
 }

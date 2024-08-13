@@ -1,60 +1,56 @@
-<header>
-  <h3 class="loginHeader">Registrar Aluno</h3>
-</header>
+<!-- Container principal da página -->
+<div class="main-content">
+  <!-- Título -->
+  <header>
+    <h3 class="loginHeader">Registrar Aluno</h3>
+  </header>
 
-<!-- Formulário de registro de aluno -->
-<form [formGroup]="alunoForm" (ngSubmit)="registrarAluno()" class="formulario">
+  <!-- Formulário de registro de aluno -->
+  <form [formGroup]="alunoForm" (ngSubmit)="registrarAluno()" class="formulario">
 
-  <!-- Nome -->
-  <label class="label"> NOME ALUNO</label>
-  <div class="input-container">
-    <i class="material-icons">person</i>
-    <input matInput formControlName="nome" placeholder="Nome" maxlength="40" required type="text">
-  </div>
+    <!-- Nome -->
+    <label class="label"> NOME ALUNO</label>
+    <div class="input-container">
+      <i class="material-icons">person</i>
+      <input matInput formControlName="nome" placeholder="Nome completo" maxlength="40" required type="text">
+    </div>
 
-  <!-- Telefone -->
-  <label class="label"> TELEFONE </label>
-  <div class="input-container">
-    <i class="material-icons">phone</i>
-    <input matInput formControlName="telefone" placeholder="Telefone" mask="(00) 00000-0000" required type="tel">
-  </div>
-
-  <div class="ladoAlado">
     <!-- Data de Nascimento -->
-    <div class="field-container">
-      <label class="labelData"> DATA DE NASCIMENTO </label>
-      <div class="input-container inputData">
-        <i class="material-icons">calendar_today</i>
-        <input matInput #dateInput formControlName="dataNascimento" type="date" required (focus)="dateInput.showPicker()" (keydown)="blockInput($event)" [attr.max]="maxDate"/>
-      </div>
+    <label class="label"> DATA DE NASCIMENTO </label>
+    <div class="input-container">
+      <i class="material-icons">calendar_today</i>
+      <input matInput #dateInput formControlName="dataNascimento" type="date" required (focus)="dateInput.showPicker()" (keydown)="blockInput($event)" [attr.max]="maxDate"/>
+    </div>
+
+    <!-- Telefone -->
+    <label class="label"> TELEFONE </label>
+    <div class="input-container">
+      <i class="material-icons">phone</i>
+      <input matInput formControlName="telefone" placeholder="(DDD) 00000-0000" mask="(00) 00000-0000" required type="tel">
     </div>
 
     <!-- CEP -->
-    <div class="field-container">
-      <label class="labelCep"> CEP </label>
-      <div class="input-container inputCep">
-        <i class="material-icons">location_on</i>
-        <input matInput formControlName="cep" placeholder="CEP" mask="00000-000" required type="text">
-      </div>
-    </div>
-  </div>
-
-  <!-- Logradouro -->
-  <label class="label"> ENDEREÇO / Nº </label>
-  <div class="input-container">
-    <i class="material-icons">business</i>
-    <input matInput formControlName="logradouro" placeholder="Logradouro" maxlength="50" required type="text">
-  </div>
-
-  <!-- Bairro -->
-  <label class="label"> BAIRRO </label>
-  <div class="input-container">
-    <i class="material-icons">location_city</i>
-    <input matInput formControlName="bairro" placeholder="Bairro" maxlength="50" required>
-  </div>
-
-  <div class="input-container estadoUf">
+    <label class="label"> CEP </label>
     <div class="input-container">
+      <i class="material-icons">location_on</i>
+      <input matInput formControlName="cep" placeholder="00000-000" mask="00000-000" required type="text" (ngModelChange)="onCepChange()">
+    </div>
+
+    <!-- Logradouro -->
+    <label class="label"> ENDEREÇO / Nº </label>
+    <div class="input-container">
+      <i class="material-icons">business</i>
+      <input matInput formControlName="logradouro" placeholder="Endereço / número" maxlength="50" required type="text">
+    </div>
+
+    <!-- Bairro -->
+    <label class="label"> BAIRRO </label>
+    <div class="input-container">
+      <i class="material-icons">location_city</i>
+      <input matInput formControlName="bairro" placeholder="Bairro" maxlength="50" required>
+    </div>
+
+    <div class="input-container estadoUf">
       <!-- Estado -->
       <div class="input-container estado">
         <i class="material-icons">location_on</i>
@@ -72,22 +68,23 @@
           <mat-option *ngFor="let uf of ufs" [value]="uf">{{ uf }}</mat-option>
         </mat-select>
       </div>
+
     </div>
-  </div>
 
-  <!-- Botão de Registrar -->
-  <button class="registrar_botao btn" type="submit">Registrar</button>
+    <!-- Botão de Registrar -->
+    <button class="registrar_botao btn" type="submit">Registrar</button>
 
-</form>
+  </form>
 
-<!-- Se houver mensagem de erro, exibir em vermelho -->
-<div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+  <!-- Se houver mensagem de erro, exibir em vermelho -->
+  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
 
-<!-- Se houver mensagem de sucesso, exibir em verde -->
-<div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+  <!-- Se houver mensagem de sucesso, exibir em verde -->
+  <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
 
-<!-- Se houver mensagem de sucesso irá mandar para tela anterior, exibir em azul -->
-<div *ngIf="infoMessage" class="alert alert-info">{{ infoMessage }}</div>
+  <!-- Se houver mensagem de sucesso irá mandar para tela anterior, exibir em azul -->
+  <div *ngIf="infoMessage" class="alert alert-info">{{ infoMessage }}</div>
 
-<!-- Mensagem de informação  -->
-<div *ngIf="limpaFormulario" class="alert alert-limpa">{{ limpaFormulario }}</div>
+  <!-- Mensagem de informação  -->
+  <div *ngIf="limpaFormulario" class="alert alert-limpa">{{ limpaFormulario }}</div>
+</div>

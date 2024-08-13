@@ -1,55 +1,57 @@
-<header>
-  <h3 class="loginHeader">Atualizar Aluno</h3>
-</header>
+<!-- Container principal da página -->
+<div class="main-content">
+  <!-- Título -->
+  <header>
+    <h3 class="loginHeader">Atualizar Aluno</h3>
+  </header>
 
-<!-- Formulário de atualização de aluno -->
-<form [formGroup]="alunoForm" (ngSubmit)="atualizarAluno()" class="formulario">
+  <!-- Formulário de atualização de aluno -->
+  <form [formGroup]="alunoForm" (ngSubmit)="atualizarAluno()" class="formulario">
 
-  <!-- Nome -->
-  <label class="label"> NOME ALUNO</label>
-  <div class="input-container">
-    <i class="material-icons">person</i>
-    <input matInput formControlName="nome" placeholder="Nome" maxlength="40" required type="text">
-  </div>
-
-  <!-- Data de Nascimento -->
-  <label class="label"> DATA DE NASCIMENTO </label>
-  <div class="input-container">
-    <i class="material-icons">calendar_today</i>
-    <input matInput formControlName="dataNascimento" type="date" required>
-  </div>
-
-  <!-- Telefone -->
-  <label class="label"> TELEFONE </label>
-  <div class="input-container">
-    <i class="material-icons">phone</i>
-    <input matInput formControlName="telefone" placeholder="Telefone" mask="(00) 00000-0000" required type="tel">
-  </div>
-
-  <!-- ENDEREÇO -->
-  <!-- CEP -->
-  <label class="label"> CEP </label>
-  <div class="input-container">
-    <i class="material-icons">location_on</i>
-    <input matInput formControlName="cep" placeholder="CEP" mask="00000-000" required type="text">
-  </div>
-
-  <!-- Logradouro -->
-  <label class="label"> ENDEREÇO / Nº </label>
-  <div class="input-container">
-    <i class="material-icons">business</i>
-    <input matInput formControlName="logradouro" placeholder="Logradouro" maxlength="50" required type="text">
-  </div>
-
-  <!-- Bairro -->
-  <label class="label"> BAIRRO </label>
-  <div class="input-container">
-    <i class="material-icons">location_city</i>
-    <input matInput formControlName="bairro" placeholder="Bairro" maxlength="50" required>
-  </div>
-  <!-- ESTADO / UF -->
-  <div class="input-container estadoUf">
+    <!-- Nome -->
+    <label class="label"> NOME ALUNO</label>
     <div class="input-container">
+      <i class="material-icons">person</i>
+      <input matInput formControlName="nome" placeholder="Nome completo" maxlength="40" required type="text">
+    </div>
+
+    <!-- Data de Nascimento -->
+    <label class="label"> DATA DE NASCIMENTO </label>
+    <div class="input-container">
+      <i class="material-icons">calendar_today</i>
+      <input matInput formControlName="dataNascimento" type="date" required mask="00/00/0000"  class="data-nascimento-input">
+    </div>
+
+    <!-- Telefone -->
+    <label class="label"> TELEFONE </label>
+    <div class="input-container">
+      <i class="material-icons">phone</i>
+      <input matInput formControlName="telefone" placeholder="(DDD) 00000-0000" mask="(00) 00000-0000" required type="tel">
+    </div>
+
+    <!-- ENDEREÇO -->
+    <!-- CEP -->
+    <label class="label"> CEP </label>
+    <div class="input-container">
+      <i class="material-icons">location_on</i>
+      <input matInput formControlName="cep" placeholder="00000-000" mask="00000-000" required type="text" (ngModelChange)="onCepChange()">
+    </div>
+
+    <!-- Logradouro -->
+    <label class="label"> ENDEREÇO / Nº </label>
+    <div class="input-container">
+      <i class="material-icons">business</i>
+      <input matInput formControlName="logradouro" placeholder="Endereço / número" maxlength="50" required type="text">
+    </div>
+
+    <!-- Bairro -->
+    <label class="label"> BAIRRO </label>
+    <div class="input-container">
+      <i class="material-icons">location_city</i>
+      <input matInput formControlName="bairro" placeholder="Bairro" maxlength="50" required>
+    </div>
+    <!-- ESTADO / UF -->
+    <div class="estadoUf input-container">
 
       <!-- Estado -->
       <div class="input-container estado">
@@ -69,22 +71,21 @@
         </mat-select>
       </div>
     </div>
-  </div>
-  <!-- ENDEREÇO  FIM -->
+    <!-- ENDEREÇO  FIM -->
 
-  <!-- Botão de Atualizar -->
-  <button class="registrar_botao btn" type="submit">Atualizar</button>
+    <!-- Botão de Atualizar -->
+    <button class="registrar_botao btn" type="submit">Atualizar</button>
 
-</form>
+  </form>
 
-<!-- Se houver mensagem de erro, exibir em vermelho -->
-<div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+  <!-- Se houver mensagem de erro, exibir em vermelho -->
+  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
 
-<!-- Se houver mensagem de sucesso, exibir em verde -->
-<div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+  <!-- Se houver mensagem de sucesso, exibir em verde -->
+  <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
 
-<!-- Se houver mensagem de sucesso irá mandar para tela anterior, exibir em azul -->
-<div *ngIf="redirectMessage" class="alert alert-info">{{ redirectMessage }}</div>
-
+  <!-- Se houver mensagem de sucesso irá mandar para tela anterior, exibir em azul -->
+  <div *ngIf="redirectMessage" class="alert alert-info">{{ redirectMessage }}</div>
+</div>
 
 

@@ -1,59 +1,58 @@
-<!-- título -->
-<header>
-  <h3 class="loginHeader">Alunos Ativos</h3>
-</header>
+<!-- Container principal da página -->
+<div class="main-content">
+  <!-- Título -->
+  <header>
+    <h3 class="loginHeader">Alunos Ativos</h3>
+  </header>
 
-<div class="input-field pesquisar">
-  <i class="material-icons prefix" (click)="focusInput()" for="search">search</i>
-  <input #searchInput id="search" type="text" (keyup)="applyFilter($event)" placeholder="Pesquisar por Nome, Endereço, Telefone ou Data">
-</div>
+  <!-- Campo de pesquisa -->
+  <div class="input-field pesquisar row">
+    <i class="material-icons" (click)="focusInput()" for="search">search</i>
+    <input #searchInput id="search" type="text" (keyup)="applyFilter($event)" placeholder="Pesquisar por Nome, Endereço, Telefone ou Data">
+  </div>
 
-<div class="mat-elevation-z8 custom-table">
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    <!-- Colunas -->
-  <!-- Nome do aluno -->
-  <ng-container matColumnDef="nome">
-    <th mat-header-cell *matHeaderCellDef class="mat-header-cell nome-column"> Nome </th>
-    <td mat-cell *matCellDef="let aluno">{{aluno.nome}}</td>
-  </ng-container>
+  <!-- Tabela de Alunos Ativos -->
+  <div class="custom-table">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <!-- Colunas -->
+      <ng-container matColumnDef="nome">
+        <th mat-header-cell *matHeaderCellDef class="mat-header-cell nome-column"> Nome </th>
+        <td mat-cell *matCellDef="let aluno">{{aluno.nome}}</td>
+      </ng-container>
 
-  <!-- Endereço -->
-  <ng-container matColumnDef="endereco">
-    <th mat-header-cell *matHeaderCellDef class="mat-header-cell endereco-column"> Endereço </th>
-    <td mat-cell *matCellDef="let aluno">
-      {{aluno.endereco.cep}}, {{aluno.endereco.logradouro}}, <br>
-      {{aluno.endereco.bairro}}, {{aluno.endereco.estado}}
-    </td>
-  </ng-container>
+      <ng-container matColumnDef="endereco">
+        <th mat-header-cell *matHeaderCellDef class="mat-header-cell endereco-column"> Endereço </th>
+        <td mat-cell *matCellDef="let aluno">
+          {{aluno.endereco.cep}}, {{aluno.endereco.logradouro}}, <br>
+          {{aluno.endereco.bairro}}, {{aluno.endereco.estado}}
+        </td>
+      </ng-container>
 
-  <!-- Data Nascimento -->
-  <ng-container matColumnDef="nascimento">
-    <th mat-header-cell *matHeaderCellDef class="mat-header-cell nascimento-column"> Data Nascimento </th>
-    <td mat-cell *matCellDef="let aluno">{{formatDate(aluno.dataNascimento)}}</td>
-  </ng-container>
+      <ng-container matColumnDef="nascimento">
+        <th mat-header-cell *matHeaderCellDef class="mat-header-cell nascimento-column"> Data Nascimento </th>
+        <td mat-cell *matCellDef="let aluno">{{formatDate(aluno.dataNascimento)}}</td>
+      </ng-container>
 
-  <!-- Telefone -->
-  <ng-container matColumnDef="telefone">
-    <th mat-header-cell *matHeaderCellDef class="mat-header-cell telefone-column"> Telefone </th>
-    <td mat-cell *matCellDef="let aluno">{{formatTelefone(aluno.telefone)}}</td>
-  </ng-container>
+      <ng-container matColumnDef="telefone">
+        <th mat-header-cell *matHeaderCellDef class="mat-header-cell telefone-column"> Telefone </th>
+        <td mat-cell *matCellDef="let aluno">{{formatTelefone(aluno.telefone)}}</td>
+      </ng-container>
 
-  <!-- Data Criação -->
-  <ng-container matColumnDef="criacao">
-    <th mat-header-cell *matHeaderCellDef class="mat-header-cell criacao-column"> Data Criação </th>
-    <td mat-cell *matCellDef="let aluno">{{formatDate(aluno.dataCriacao)}}</td>
-  </ng-container>
+      <ng-container matColumnDef="criacao">
+        <th mat-header-cell *matHeaderCellDef class="mat-header-cell criacao-column"> Data Criação </th>
+        <td mat-cell *matCellDef="let aluno">{{formatDate(aluno.dataCriacao)}}</td>
+      </ng-container>
 
-  <!-- UF -->
-  <ng-container matColumnDef="uf">
-    <th mat-header-cell *matHeaderCellDef class="mat-header-cell uf-column"> UF </th>
-    <td mat-cell *matCellDef="let aluno">{{aluno.endereco.uf}}</td>
-  </ng-container>
+      <ng-container matColumnDef="uf">
+        <th mat-header-cell *matHeaderCellDef class="mat-header-cell uf-column"> UF </th>
+        <td mat-cell *matCellDef="let aluno">{{aluno.endereco.uf}}</td>
+      </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
 
-   <!-- Paginador -->
-   <mat-paginator class="paginator" showFirstLastButtons [pageSize]="10" pageSize="10" [length]="dataSource.data.length"/>
+    <!-- Paginador -->
+    <mat-paginator class="paginator" showFirstLastButtons [pageSize]="10" pageSize="10" [length]="dataSource.data.length"/>
+  </div>
 </div>

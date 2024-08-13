@@ -10,6 +10,7 @@ import { AlunoDTO, CreateAlunoDTO, UdpateAlunoDTO } from '../../models/alunos.mo
   providedIn: 'root'
 })
 export class AlunosService {
+  cepAnterior: string = '';
   private baseUrl = environment.local;
 
   constructor(private http: HttpClient) { }
@@ -80,4 +81,17 @@ export class AlunosService {
     const url = `${this.baseUrl}/mensalidade/${id}`;
     return this.http.put(url, { status });
   }
+
+  buscarEnderecoPorCep(cep: string): Observable<any> {
+    const url = `https://viacep.com.br/ws/${cep}/json/`;
+    return this.http.get<any>(url)
+      .pipe(
+        catchError((error) => {
+          console.error('Erro ao buscar endereço por CEP:', error);
+          throw error;
+        })
+      );
+  }
+
+
 }

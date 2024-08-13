@@ -1,54 +1,58 @@
-<!-- Titulo -->
-<header>
-  <h3 class="loginHeader">Mensalidade do aluno</h3>
-</header>
+<!-- Container principal da página -->
+<div class="main-content">
 
-<!-- Filtro de pesquisa -->
-<div class="input-field pesquisar">
-  <i class="material-icons prefix" (click)="focusInput()" for="search">search</i>
-  <input #searchInput id="search" type="text" (keyup)="applyFilter($event)" placeholder="Pesquisar por Nome, Data, Valor ou Status">
-</div>
+  <!-- Titulo -->
+  <header>
+    <h3 class="loginHeader">Mensalidade do aluno</h3>
+  </header>
 
-<div class="mat-elevation-z8 custom-table">
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <!-- Filtro de pesquisa -->
+  <div class="input-field pesquisar">
+    <i class="material-icons prefix" (click)="focusInput()" for="search">search</i>
+    <input #searchInput id="search" type="text" (keyup)="applyFilter($event)" placeholder="Pesquisar por Nome, Data, Valor ou Status">
+  </div>
 
-    <!-- Nome -->
-    <ng-container matColumnDef="nome" class="nome-column">
-      <th mat-header-cell *matHeaderCellDef> Nome </th>
-      <td mat-cell *matCellDef="let element"> {{element.aluno.nome}} </td>
-    </ng-container>
+  <div class="custom-table">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-    <!-- Data Vencimento -->
-    <ng-container matColumnDef="dataVencimento">
-      <th mat-header-cell *matHeaderCellDef> Data de Vencimento </th>
-      <td mat-cell *matCellDef="let element"> {{ formatDate(element.dataVencimento) }} </td>
-    </ng-container>
+      <!-- Nome -->
+      <ng-container matColumnDef="nome" class="nome-column">
+        <th mat-header-cell *matHeaderCellDef> Nome </th>
+        <td mat-cell *matCellDef="let element"> {{element.aluno.nome}} </td>
+      </ng-container>
 
-    <!-- Valor -->
-    <ng-container matColumnDef="valor" class="valor-column">
-      <th mat-header-cell *matHeaderCellDef> Valor </th>
-      <td mat-cell *matCellDef="let element"> {{element.valor}} </td>
-    </ng-container>
+      <!-- Data Vencimento -->
+      <ng-container matColumnDef="dataVencimento">
+        <th mat-header-cell *matHeaderCellDef> Data de Vencimento </th>
+        <td mat-cell *matCellDef="let element"> {{ formatDate(element.dataVencimento) }} </td>
+      </ng-container>
 
-    <!-- Status -->
-    <ng-container matColumnDef="status" class="status-column" id="status">
-      <th mat-header-cell *matHeaderCellDef>Status</th>
-      <td mat-cell *matCellDef="let element"> {{getStatusName(element.status)}} </td>
-    </ng-container>
+      <!-- Valor -->
+      <ng-container matColumnDef="valor" class="valor-column">
+        <th mat-header-cell *matHeaderCellDef> Valor </th>
+        <td mat-cell *matCellDef="let element"> {{element.valor}} </td>
+      </ng-container>
 
- <!-- Coluna AÇÕES -->
-<ng-container matColumnDef="actions" class="actions-column">
-  <th mat-header-cell *matHeaderCellDef class="mat-header-cell actions-column"> Ações </th>
-  <td mat-cell *matCellDef="let element">
-    <button *ngIf="element.status !== 2" class="btn ativar" (click)="aprovarPagamento(element.aluno.id)"> Confirmar Pagamento </button>
-    <button *ngIf="element.status === 2" class="btn disabled pago">Pagamento Concluído</button>
-  </td>
-</ng-container>
+      <!-- Status -->
+      <ng-container matColumnDef="status" class="status-column" id="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let element"> {{getStatusName(element.status)}} </td>
+      </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+  <!-- Coluna AÇÕES -->
+  <ng-container matColumnDef="actions" class="actions-column">
+    <th mat-header-cell *matHeaderCellDef class="mat-header-cell actions-column"> Ações </th>
+    <td mat-cell *matCellDef="let element">
+      <button *ngIf="element.status !== 2" class="btn ativar" (click)="aprovarPagamento(element.aluno.id)"> Confirmar Pagamento </button>
+      <button *ngIf="element.status === 2" class="btn disabled pago">Pagamento Concluído</button>
+    </td>
+  </ng-container>
 
-  <!-- Paginador -->
-  <mat-paginator class="paginator" showFirstLastButtons [pageSize]="10" pageSize="10" [length]="dataSource.data.length"></mat-paginator>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <!-- Paginador -->
+    <mat-paginator class="paginator" showFirstLastButtons [pageSize]="10" pageSize="10" [length]="dataSource.data.length"></mat-paginator>
+  </div>
 </div>
