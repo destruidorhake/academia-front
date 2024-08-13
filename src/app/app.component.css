@@ -1,0 +1,34 @@
+/* Container principal que envolve a sidebar e o conteúdo principal */
+.main-container {
+  display: flex;
+  min-height: 100vh; /* Garante que o container ocupe a altura total da tela */
+}
+
+/* Sidebar fixa no lado esquerdo */
+app-side-bar {
+  width: 250px; /* Ajuste conforme o tamanho da sua sidebar */
+  flex-shrink: 0; /* Impede que a sidebar encolha */
+}
+
+/* Conteúdo principal que usa o restante do espaço */
+.main-content {
+  flex: 1; /* O conteúdo principal usa o espaço restante */
+  overflow: auto; /* Permite rolagem se o conteúdo exceder a altura da tela */
+}
+
+/* Adiciona um espaçamento no lado direito do conteúdo para não encostar na sidebar */
+.main-content {
+  margin-left: auto; /* Ajuste conforme o tamanho da sua sidebar */
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+  .main-container {
+    flex-direction: column;
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding: 10px;
+  }
+}

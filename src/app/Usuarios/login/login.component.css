@@ -1,142 +1,152 @@
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 .fundo {
-    background-image: url("../../../app/models/Imagens/fundo.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 100vh;
-    background-position-y: -35vh;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-}
-
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px white inset !important;
-    -webkit-text-fill-color: #000 !important;
+  background-image: url("../../../app/models/Imagens/fundo.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .input-field input::-webkit-input-placeholder {
-    color: #000000;
+  color: #000;
+}
+
+.input-field input:-webkit-autofill,
+.input-field input:-webkit-autofill:hover,
+.input-field input:-webkit-autofill:focus,
+.input-field input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+  -webkit-text-fill-color: #000 !important;
 }
 
 .login-senha {
-    width: 95%;
-    display: flex;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
 .container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 90vh;
-    max-height: 90vh;
-    width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 1rem;
 }
 
 .screen {
-    background-color: rgb(255, 255, 255);
-    position: relative;
-    min-height: 50vh;
-    max-height: auto;
-    width: 25vw;
-    border-radius: 1%;
-    border-color: #000000;
-    border-style: solid;
-    border-width: 1px;
+  background-color: #fff;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  padding: 2rem;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .screen__content {
-    z-index: 1;
-    position: relative;
-    height: 100%;
+  position: relative;
+  height: 100%;
 }
 
 .login {
-    width: 100%;
-    padding: 2vh;
-    padding-top: 10vh;
+  width: 100%;
 }
 
 .login_botao {
-  padding-right: 1dvw;
-  padding-left: 1dvw;
-  margin-right: auto;
-  margin-left: auto;
-  margin-top: 1.8vw;
   text-transform: uppercase;
-  font-weight: 700;
-  display: flex;
-  width: auto;
+  font-weight: bolder;
+  height: auto;
+  width: 100%;
   background-color: rgb(0, 174, 255);
   transition: background-color 0.3s ease;
+  border: none;
+  padding: 1dvh;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+  align-self: center;
 }
 
 .login_botao:hover {
-    background-color: rgb(0, 117, 172);
+  background-color: rgb(0, 117, 172);
 }
 
-.login_botao:active{
-    background-color: white;
-    outline: none;
+.login_botao:active {
+  background-color: white;
+  color: rgb(0, 117, 172);
+  outline: none;
 }
-
 
 .loginHeader {
-    margin-top: 5vh;
-    margin-bottom: -3vh;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    text-decoration: underline;
-    color: black;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: underline;
+  color: #000;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  margin-bottom: 1dvh;
 }
 
 .copy {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    color: #000000;
-    text-align: center;
-    margin-top: 5vh;
-    text-decoration: underline;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: #000;
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 90%;
+  text-decoration: underline;
+}
+
+.alert {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+  padding: 0.5rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.438);
 }
 
 .alert-danger {
   color: #a94442;
   background-color: #f2dede;
-  border-color: #ebccd1;
-  max-width: fit-content;
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  z-index: 1000;
-  text-transform: capitalize;
-  padding: 0.5vw;
-  border: 0.5px solid;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.438);
+  border: 1px solid #ebccd1;
 }
 
 .alert-info {
   color: #31708f;
   background-color: #d9edf7;
-  border-color: #bce8f1;
-  max-width: fit-content;
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  z-index: 1000;
-  text-transform: capitalize;
-  padding: 0.5vw;
-  border: 0.5px solid;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.438);
+  border: 1px solid #bce8f1;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .fundo {
+      background-position: center top;
+  }
+
+  .screen {
+      width: 90%;
+      max-width: none;
+      padding: 1rem;
+  }
+
+  .login_botao {
+      font-size: 1rem;
+  }
+
+  .loginHeader {
+      font-size: 1.2rem;
+  }
+
+  .copy {
+      font-size: 0.8rem;
+  }
 }

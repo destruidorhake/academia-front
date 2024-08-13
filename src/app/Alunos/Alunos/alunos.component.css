@@ -1,109 +1,82 @@
-.loginHeader{
-  max-width: 85vw;
-  margin-left: 20vw;
-  margin-right: 5vw;
-  padding-top: 1vh;
-  font-weight: bold;
-  text-transform: uppercase;
+/* Estilo para o container principal da página */
+.main-content {
+  margin-left: 5dvw;
+  margin-right: 5dvw;
+  min-height: fit-content;
+  height: auto;
+  max-height: max-content;
+  box-sizing: border-box;
 }
 
-.custom-table {
-    width: 75vw;
-    max-width: 85vw;
-    margin-top: 3vh;
-    margin-left: 20vw;
-    margin-right: 5vw;
-    background-color: rgb(250, 250, 250);
-    border-radius: 0.5rem;
-    border: 1px solid #ccc;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: flexbox;
-    height: auto;
-  }
-
-.mat-mdc-header-row{
-  border-bottom-color: var(--mat-table-row-item-outline-color, rgba(0, 0, 0, 0.12));
-  border-bottom-width: var(--mat-table-row-item-outline-width, 1px);
-  border-bottom-style: solid;
-  letter-spacing: var(--mat-table-header-headline-tracking);
+/* Ajustes no título */
+.loginHeader {
+  width: 100%;
+  margin-top: 5dvh;
   font-weight: bold;
-  line-height: inherit;
-  box-sizing: border-box;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  outline: none;
-  text-align: left;
+  font-size: 300%;
   text-transform: uppercase;
+  text-align: left;
+}
+
+/* Ajustes no campo de pesquisa */
+.pesquisar {
+  display: flex;
+  gap: 1dvh;
+  align-items: center;
+  padding-bottom: 1vh;
+  width: 100%;
 }
 
 .mat-mdc-row {
   background-color: #fff;
-  color: #666;
+  color: #444;
 }
 
-.pesquisar {
-  margin-bottom: 20px;
-  width: 75vw;
-  max-width: 75vw;
-  margin-left: 20vw;
-  margin-right: 5vw;
+tr {
+  border-bottom: 0.1px solid rgb(104, 104, 104);
 }
 
+/* Estilo para a tabela */
+.custom-table {
+  width: 100%;
+  margin: 3vh auto;
+  background-color: rgb(250, 250, 250);
+  border: 0.1px solid #dfdfdf;
+}
 
-.atualizar {
-  margin-right: 0.3vw;
-  margin-left: auto;
+/* Estilo para os botões */
+.atualizar, .apagar, .ativar {
   text-transform: uppercase;
   width: auto;
-  background-color: rgb(0, 174, 255);
+  margin: 0.5rem;
   transition: background-color 0.3s ease;
+}
+
+.atualizar {
+  background-color: rgb(0, 174, 255);
 }
 
 .atualizar:hover {
   background-color: rgb(0, 117, 172);
 }
 
-.atualizar:active {
-  background-color: white;
-  outline: none;
-}
-
-.apagar{
-  margin-right: auto;
-  margin-left: auto;
-  text-transform: uppercase;
-  width: auto;
+.apagar {
   background-color: rgb(255, 49, 49);
-  transition: background-color 0.3s ease;
 }
 
 .apagar:hover {
   background-color: rgb(190, 28, 28);
 }
 
-.apagar:active {
-  background-color: white;
-  outline: none;
-}
-
-.ativar{
-  margin-right: auto;
-  margin-left: auto;
-  text-transform: uppercase;
-  width: auto;
+.ativar {
   background-color: rgb(53, 196, 40);
-  transition: background-color 0.3s ease;
 }
 
 .ativar:hover {
   background-color: rgb(35, 141, 31);
 }
 
-.ativar:active {
-  background-color: white;
-  outline: none;
-}
-
+/* Estilo para as colunas da tabela */
 .nome-column {
   width: 19%;
 }
@@ -113,11 +86,11 @@
 }
 
 .criacao-column {
-  width: 10%;
+  width: auto;
 }
 
 .telefone-column {
-  width: 12%;
+  width: auto;
 }
 
 .endereco-column {
@@ -125,22 +98,12 @@
 }
 
 .actions-column {
-  width: 30%;
+  width: auto;
   justify-content: center;
 }
 
-.bloqueia_tabela {
-  height: 100dvh;
-  width: 100dvw;
-  background-color: black;
-  z-index: 2;
-}
-
-.overlay {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 100dvw;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 4;
+/* Títulos */
+.mat-header-cell {
+  font-weight: bolder;
+  text-transform: uppercase;
 }

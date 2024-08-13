@@ -1,40 +1,42 @@
-<div class="sidebar fundo">
+<!-- Botão para abrir/fechar a sidebar -->
+<button (click)="toggleSidebar()" class="menu-button" [style.left]="isSidebarOpen ? '250px' : '10px'">
+  <i class="material-icons">menu</i>
+</button>
+
+<!-- Sidebar -->
+<div class="sidebar fundo" [ngClass]="{'open': isSidebarOpen, 'closed': !isSidebarOpen}">
   <h3 class="logoAcademia text-content">
-    <i class="medium material-icons">fitness_center</i> Academia
+    <i class="large material-icons">fitness_center</i> Academia
   </h3>
   <ul class="text-content">
     <!-- ALUNOS ATIVOS -->
     <li>
       <a class="logo" [routerLink]="['/search/ativos']" routerLinkActive="active-link">
-        <i class="material-icons small">people</i> Alunos Ativos
+        <i class="material-icons small">people</i> <span>Alunos Ativos</span>
       </a>
     </li>
-
     <!-- ALUNOS CADASTRADOS -->
     <li>
       <a class="logo" [routerLink]="['/search']" routerLinkActive="active-link">
-        <i class="material-icons small">people_outline</i> Alunos Cadastrados
+        <i class="material-icons small">people_outline</i> <span>Alunos Cadastrados</span>
       </a>
     </li>
-
     <!-- REGISTRAR -->
     <li>
       <a class="logo" [routerLink]="['/search/registrar']" routerLinkActive="active-link">
-        <i class="material-icons small">person_add</i> Registrar Aluno
+        <i class="material-icons small">person_add</i> <span>Registrar Aluno</span>
       </a>
     </li>
-
-     <!-- MENSALIDADES TOTAIS -->
-     <li>
+    <!-- MENSALIDADES TOTAIS -->
+    <li>
       <a class="logo" [routerLink]="['/search/mensalidades']" routerLinkActive="active-link">
-        <i class="material-icons small">attach_money</i> Mensalidades Gerais
+        <i class="material-icons small">attach_money</i> <span>Mensalidades Gerais</span>
       </a>
     </li>
-
     <!-- SAIR -->
     <li>
       <a class="logo" [routerLink]="['/login']" (click)="logout()">
-        <i class="material-icons small">login</i> Sair
+        <i class="material-icons small">login</i> <span>Sair</span>
       </a>
     </li>
   </ul>

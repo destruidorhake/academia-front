@@ -1,25 +1,33 @@
-.formulario {
-  display: flex;
-  flex-direction: column;
-  max-width: 30vw;
-  width: 30vw;
-  margin-left: 20vw;
-  margin-right: 5vw;
-  padding: 20px;
-  background-color: #fafafa;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  align-items: left;
+/* Estilo para o container principal da página */
+.main-content {
+  margin-left: 5dvw;
+  margin-right: 5dvw;
+  min-height: fit-content;
+  height: auto;
+  max-height: max-content;
+  box-sizing: border-box;
 }
 
+.formulario {
+  padding: 2%;
+  display: flex;
+  flex-direction: column;
+  max-width: 40%;
+  width: 100%;
+  background-color: #fafafa;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.478);
+}
+
+/* Ajustes no título */
 .loginHeader {
-  max-width: 85vw;
-  margin-left: 20vw;
-  margin-right: 5vw;
-  padding-top: 1vh;
+  width: 100%;
+  margin-top: 5dvh;
   font-weight: bold;
+  font-size: 300%;
   text-transform: uppercase;
+  text-align: left;
 }
 
 .registrar_botao {
@@ -41,88 +49,18 @@
   outline: none;
 }
 
-.error-message {
-  color: red;
-  text-transform: capitalize;
-  font-weight: bolder;
-  max-width: fit-content;
-  background-color: #ff000050;
-  padding: 0.5vw;
-  border: 0.5px solid #ffffff;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.438);
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  z-index: 1000;
-}
-
-.info-message {
-  color: rgb(116, 108, 0);
-  text-transform: capitalize;
-  font-weight: bolder;
-  max-width: fit-content;
-  background-color: rgb(253, 255, 140);
-  padding: 0.5vw;
-  border: 0.5px solid #ffffff;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.438);
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  z-index: 1000;
-}
-
-.linpando-message {
-  color: rgb(116, 108, 0);
-  text-transform: capitalize;
-  font-weight: bolder;
-  max-width: fit-content;
-  background-color: rgb(253, 255, 140);
-  padding: 0.5vw;
-  border: 0.5px solid #ffffff;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.438);
-  position: fixed;
-  top: 60px;
-  right: 10px;
-  z-index: 1000;
-}
-
-.success-message {
-  color: rgb(0, 209, 0);
-  text-transform: capitalize;
-  font-weight: bolder;
-  max-width: fit-content;
-  background-color: rgb(160 255 160);
-  padding: 0.5vw;
-  border: 0.5px solid #ffffff;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.438);
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  z-index: 1000;
-}
-
 .mat-icon {
   background-color: black;
 }
 
 .input-container {
   display: flex;
-  align-items: center;
-  width: 85%;
-  margin-left: 7.5%;
+  width: 90%;
+  margin: 0 auto;
 }
 
 .input-container i.material-icons {
-  margin-right: 0.7vw;
-}
-
-.mat-form-field {
-  width: 100%;
-  margin-bottom: auto;
+  margin-right: 2%;
 }
 
 .input-container input {
@@ -138,30 +76,27 @@ input:-webkit-autofill:active {
 }
 
 .label {
-  margin-left: 4dvw;
+  margin-left: 11.5%;
+  text-transform: uppercase;
   color: #000;
   margin-top: 1dvh;
 }
 
 .estadoUf {
-  margin-top: 2dvh;
+  gap: 1dvw;
+  display: flex;
+  width: 90%;
+  justify-content: space-between;
 }
 
-.label-estado {
-  width: 18dvw;
+.uf {
+  width: 55%;
+  text-align: right;
 }
 
-.label-uf {
-  width: 20dvw;
-}
-
-.estado{
-  margin-left: -1.8dvw;
-  width: 70%;
-}
-
-.uf{
-  width: 40%;
+.estado {
+  width: 55;
+  text-align: right;
 }
 
 .alert-danger {
@@ -228,34 +163,3 @@ input:-webkit-autofill:active {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.438);
 }
 
-.ladoAlado{
-  display: flex;
-  justify-content: space-between;
-
-}
-
-.field-container {
-  flex: 1;
-}
-
-.labelData{
-  margin-left: 4dvw;
-  color: #000;
-  margin-top: 1dvh;
-}
-
-.labelCep{
-  margin-left: 3dvw;
-  color: #000;
-  margin-top: 1dvh;
-}
-
-.inputData {
-  padding-left: 1dvw;
-  max-width: 10.8dvw;
-}
-
-.inputCep {
-  padding-left: -3dvw;
-  max-width: 10.8dvw;
-}

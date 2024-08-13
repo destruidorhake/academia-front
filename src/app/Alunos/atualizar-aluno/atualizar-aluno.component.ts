@@ -147,4 +147,33 @@ export class AlunosAtualizarComponent {
       }
     }, delay);
   }
-}
+
+  onCepChange(): void {
+    const cepAtual = this.alunoForm.get('cep')?.value;
+
+    if (cepAtual) {
+      // Armazene o CEP atual antes de alterá-lo
+      const cepAnterior = this.alunosService.cepAnterior || '';
+
+      // Verifique se o CEP foi realmente alterado
+      if (cepAtual !== cepAnterior) {
+        this.alunosService.buscarEnderecoPorCep(cepAtual).subscribe({
+          next: (endereco) => {
+            // Preencha os campos com os dados retornados pelo CEP
+            this.alunoForm.patchValue({
+              logradouro: endereco.logradouro,
+              bairro: endereco.bairro,
+              estado: endereco.localidade,
+              uf: endereco.uf
+            });
+
+            // Atualize o valor do CEP anterior
+            this.alunosService.cepAnterior = cepAtual;
+          },
+          error: (err) => {
+            console.error('Erro ao buscar endereço:', err);
+          }
+        });
+      }
+    }
+  }}

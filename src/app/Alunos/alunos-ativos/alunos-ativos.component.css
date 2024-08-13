@@ -1,123 +1,59 @@
-.loginHeader{
-  max-width: 85vw;
-  margin-left: 20vw;
-  margin-right: 5vw;
-  padding-top: 1vh;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-.custom-table {
-    width: 75vw;
-    max-width: 85vw;
-    margin-top: 3vh;
-    margin-left: 20vw;
-    margin-right: 5vw;
-    background-color: rgb(250, 250, 250);
-    border-radius: 0.5rem;
-    border: 1px solid #ccc;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: flexbox;
-    height: auto;
-  }
-
-.login_botao {
-  margin-right: auto;
-  margin-left: auto;
-  text-transform: uppercase;
-  width: auto;
-  background-color: rgb(0, 174, 255);
-  transition: background-color 0.3s ease;
-  margin-left: 1vw;
-}
-
-.login_botao:hover {
-  background-color: rgb(0, 117, 172);
-}
-
-.login_botao:active {
-  background-color: white;
-  outline: none;
-}
-
-.mat-mdc-header-cell {
-  background: rgb(228, 228, 228);
-  border-bottom-color: var(--mat-table-row-item-outline-color, rgba(0, 0, 0, 0.12));
-  border-bottom-width: var(--mat-table-row-item-outline-width, 1px);
-  border-bottom-style: solid;
-  letter-spacing: var(--mat-table-header-headline-tracking);
-  font-weight: bold;
-  line-height: inherit;
+/* Estilo para o container principal da página */
+.main-content {
+  margin-left: 5dvw;
+  margin-right: 5dvw;
+  min-height: fit-content;
+  height: auto;
+  max-height: max-content;
   box-sizing: border-box;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  outline: none;
-  text-align: left;
-  text-transform: uppercase;
 }
 
+/* Ajustes no título */
+.loginHeader {
+  width: 100%;
+  margin-top: 5dvh;
+  font-weight: bold;
+  font-size: 300%;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+/* Ajustes no campo de pesquisa */
+.pesquisar {
+  display: flex;
+  gap: 1dvh;
+  align-items: center;
+  padding-bottom: 1vh;
+  width: 100%;
+}
+
+/* Estilo para a coluna */
 .mat-mdc-row {
   background-color: #fff;
-  color: #666;
+  color: #444;
 }
 
-.pesquisar {
-  margin-bottom: 20px;
-  width: 75vw;
-  max-width: 75vw;
-  margin-left: 20vw;
-  margin-right: 5vw;
+tr {
+  border-bottom: 0.1px solid rgb(104, 104, 104);
 }
 
-.apagar {
-  margin-left: 1vw;
-  align-items: center;
-  justify-content: center;
-  width: auto;
-  background-color: rgb(255, 69, 69);
-  transition: background-color 0.3s ease;
-  border: none;
-  padding: 0.5rem;
-  border-radius: 4px;
+/* Estilo para a tabela */
+.custom-table {
+  width: 100%;
+  margin: 3vh auto;
+  background-color: rgb(250, 250, 250);
+  border: 0.1px solid #dfdfdf;
 }
 
-.apagar:hover {
-  background-color: rgb(136, 22, 22);
+/* Estilo para a tabela */
+.paginator {
+  width: 100%;
 }
 
-.apagar:active {
-  background-color: white;
-  outline: none;
-}
-.x {
-  margin-top: -2px;
-}
-
-
-
-
-.nome-column {
-  width: 25%;
-}
-
-.nascimento-column {
-  width: 15%;
-}
-
-.criacao-column {
-  width: 15%;
-}
-
-.telefone-column {
-  width: 15%;
-}
-
-.endereco-column {
-  width: 25%;
-}
-
-.uf-column {
-  width: 5%;
+/* Títulos */
+.mat-header-cell {
+  font-weight: bolder;
+  text-transform: uppercase;
 }
 
 
