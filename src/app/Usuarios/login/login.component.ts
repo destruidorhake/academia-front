@@ -10,7 +10,7 @@ import { filter } from 'rxjs';
   standalone: true,
   imports: [RouterModule,FormsModule, CommonModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
   email: string = '';
@@ -62,12 +62,22 @@ export class LoginComponent {
         } else {
           this.infoMessage = 'Login falhou. Verifique suas credenciais!';
           this.loginError = true;
+          this.clearMessagesAfterDelay();
         }
       },
       error: () => {
         this.errorMessage = 'Erro ao enviar as credenciais de login!';
         this.loginError = true;
+        this.clearMessagesAfterDelay();
       }
     });
+  }
+
+  private clearMessagesAfterDelay(): void {
+    setTimeout(() => {
+      this.errorMessage = '';
+      this.infoMessage = '';
+      this.infoMessage = '';
+    }, 5000);
   }
 }

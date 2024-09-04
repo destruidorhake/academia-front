@@ -8,8 +8,8 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
-import { Mensalidade } from '../../models/aluno.model';
 import { AlunosService } from '../../Services/Alunos.Service/alunos.service';
+import { MensalidadeDTO } from '../../models/alunos.model';
 
 @Component({
   selector: 'app-mensalidades-alunos-totais',
@@ -30,7 +30,7 @@ import { AlunosService } from '../../Services/Alunos.Service/alunos.service';
 })
 export class MensalidadesAlunosTotaisComponent {
   statusOptions: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-  dataSource = new MatTableDataSource<Mensalidade>();
+  dataSource = new MatTableDataSource<MensalidadeDTO>();
   displayedColumns: string[] = ['nome', 'dataVencimento', 'valor', 'status']; // Removido 'actions'
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
@@ -69,7 +69,7 @@ export class MensalidadesAlunosTotaisComponent {
     const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
     if (filterValue) {
       this.dataSource.filter = filterValue;
-      this.dataSource.filterPredicate = (data: Mensalidade, filter: string) => {
+      this.dataSource.filterPredicate = (data: MensalidadeDTO, filter: string) => {
         const searchString = filter.toLowerCase();
         return (
           data.aluno.nome.toLowerCase().includes(searchString) ||

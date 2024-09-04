@@ -7,8 +7,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { RouterModule } from '@angular/router';
-import { Aluno, AlunosResponse } from '../../models/aluno.model';
 import { AlunosService } from '../../Services/Alunos.Service/alunos.service';
+import { AlunoDTO, ResponseDTO } from '../../models/alunos.model';
 
 @Component({
   selector: 'app-alunos-ativos',
@@ -32,13 +32,13 @@ export class AlunosAtivosComponent {
   @ViewChild('searchInput') searchInput!: ElementRef;
 
   displayedColumns: string[] = ['nome', 'endereco','nascimento', 'telefone', 'criacao'];
-  dataSource = new MatTableDataSource<Aluno>();
+  dataSource = new MatTableDataSource<AlunoDTO>();
 
   constructor(private alunosService: AlunosService) {}
 
   // METODO DE INICIALIZAÇÃO DO COMPOONENT
   ngOnInit() {
-    this.alunosService.getAlunos().subscribe((response: AlunosResponse) => {
+    this.alunosService.getAlunos().subscribe((response: ResponseDTO) => {
       const alunosAtivos = response.content.filter(aluno => aluno.ativo === 'S');
       this.dataSource.data = alunosAtivos;
     });
@@ -58,7 +58,7 @@ export class AlunosAtivosComponent {
   // METODO DE FILTRO PARA A BARRA DE PESQUISA
   applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
-    this.dataSource.filterPredicate = (data: Aluno, filter: string) => {
+    this.dataSource.filterPredicate = (data: AlunoDTO, filter: string) => {
       const dataStr = `${data.nome} ${data.endereco.cep} ${data.endereco.logradouro} ${data.endereco.bairro} ${data.endereco.estado} ${data.telefone} ${this.formatDate(data.dataNascimento)} ${this.formatDate(data.dataCriacao)}`.toLowerCase();
       return dataStr.indexOf(filter) !== -1;
     };

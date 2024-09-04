@@ -127,7 +127,7 @@
 }
 
 /* Media Queries */
-@media (max-width: 768px) {
+@media (max-width: 100dvh) {
   .fundo {
       background-position: center top;
   }

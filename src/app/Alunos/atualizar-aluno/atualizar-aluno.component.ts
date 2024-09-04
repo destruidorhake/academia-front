@@ -45,6 +45,7 @@ export class AlunosAtualizarComponent {
   successMessage: string = '';
   redirectMessage: string = '';
   alunoId: number = 0;
+  maxDate: string = '';
 
   estados = ESTADOS;
   ufs = UFS;
@@ -54,7 +55,11 @@ export class AlunosAtualizarComponent {
     private alunosService: AlunosService,
     private route: ActivatedRoute,
     private router: Router,
-  ) {}
+  ) {
+       // Calcular a data máxima permitida
+       const today = new Date();
+       this.maxDate = today.toISOString().split('T')[0];
+  }
 
   ngOnInit(): void {
     this.alunoId = Number(this.route.snapshot.paramMap.get('id'));
@@ -71,6 +76,10 @@ export class AlunosAtualizarComponent {
     });
 
     this.carregarAluno(this.alunoId);
+  }
+
+  blockInput(event: KeyboardEvent): void {
+    event.preventDefault();
   }
 
   carregarAluno(id: number): void {
