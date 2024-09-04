@@ -8,9 +8,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule  } from '@angular/material/dialog';
-import { Aluno, AlunosResponse } from '../../models/aluno.model';
 import { AlunosService } from '../../Services/Alunos.Service/alunos.service';
 import { DialogService } from '../../Services/Dialog.Service/dialog.service';
+import { AlunoDTO, ResponseDTO } from '../../models/alunos.model';
 
 @Component({
   selector: 'app-alunos',
@@ -35,7 +35,7 @@ export class AlunosComponent implements OnInit {
 
   @ViewChild('searchInput') searchInput!: ElementRef;
 
-  dataSource = new MatTableDataSource<Aluno>();
+  dataSource = new MatTableDataSource<AlunoDTO>();
   displayedColumns: string[] = ['nome', 'endereco', 'nascimento', 'telefone', 'criacao', 'actions'];
 
   constructor(
@@ -59,7 +59,7 @@ export class AlunosComponent implements OnInit {
 
   applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
-    this.dataSource.filterPredicate = (data: Aluno, filter: string) => {
+    this.dataSource.filterPredicate = (data: AlunoDTO, filter: string) => {
       const dataStr =
       `${data.nome}
        ${data.endereco.cep}
@@ -84,7 +84,7 @@ export class AlunosComponent implements OnInit {
 
   carregarAlunos() {
     this.alunosService.getAlunos().subscribe(
-      (data: AlunosResponse) => {
+      (data: ResponseDTO) => {
         this.dataSource.data = data.content;
       },
       (error) => {

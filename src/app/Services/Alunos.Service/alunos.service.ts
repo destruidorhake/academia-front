@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
+import { AlunoDTO, CreateAlunoDTO, UdpateAlunoDTO, MensalidadeDTO } from '../../models/alunos.model';
 import { environment } from '../environment';
-import { RegistrarAluno, Mensalidade } from '../../models/aluno.model';
-import { AlunoDTO, CreateAlunoDTO, UdpateAlunoDTO } from '../../models/alunos.model';
 
 @Injectable({
   providedIn: 'root'
@@ -32,8 +31,8 @@ export class AlunosService {
       );
   }
 
-  getAlunoById(id: number): Observable<RegistrarAluno> {
-    return this.http.get<RegistrarAluno>(`${this.baseUrl}/aluno/${id}`)
+  getAlunoById(id: number): Observable<CreateAlunoDTO> {
+    return this.http.get<CreateAlunoDTO>(`${this.baseUrl}/aluno/${id}`)
       .pipe(
         catchError((error) => {
           console.error('Erro ao buscar aluno por ID:', error);
@@ -60,7 +59,7 @@ export class AlunosService {
       );
   }
 
-  getMensalidades(alunoId: number, status?: number): Observable<Mensalidade[]> {
+  getMensalidades(alunoId: number, status?: number): Observable<MensalidadeDTO[]> {
     const url = `${this.baseUrl}/mensalidade`;
     let queryParams = new HttpParams().set('alunoId', alunoId.toString());
 
@@ -68,7 +67,7 @@ export class AlunosService {
       queryParams = queryParams.set('status', status.toString());
     }
 
-    return this.http.get<Mensalidade[]>(url, { params: queryParams })
+    return this.http.get<MensalidadeDTO[]>(url, { params: queryParams })
       .pipe(
         catchError((error) => {
           console.error('Erro ao obter mensalidades:', error);
@@ -77,10 +76,19 @@ export class AlunosService {
       );
   }
 
-  updateStatus(id: number, status: number): Observable<any> {
+  updateStatus(id: number, status: number): Observable<void> {
     const url = `${this.baseUrl}/mensalidade/${id}`;
-    return this.http.put(url, { status });
+    const body = { status }; // Cria o corpo da requisição com o novo status
+
+    return this.http.put<void>(url, body)
+      .pipe(
+        catchError((error) => {
+          console.error('Erro ao atualizar status:', error);
+          throw error;
+        })
+      );
   }
+
 
   buscarEnderecoPorCep(cep: string): Observable<any> {
     const url = `https://viacep.com.br/ws/${cep}/json/`;

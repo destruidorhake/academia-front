@@ -19,7 +19,8 @@
     <label class="label"> DATA DE NASCIMENTO </label>
     <div class="input-container">
       <i class="material-icons">calendar_today</i>
-      <input matInput formControlName="dataNascimento" type="date" required mask="00/00/0000"  class="data-nascimento-input">
+      <input matInput #dateInput formControlName="dataNascimento" type="date" required (focus)="dateInput.showPicker()"
+      (keydown)="blockInput($event)" [attr.max]="maxDate"/>
     </div>
 
     <!-- Telefone -->

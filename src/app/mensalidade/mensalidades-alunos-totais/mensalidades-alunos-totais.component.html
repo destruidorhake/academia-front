@@ -5,10 +5,10 @@
     <h3 class="loginHeader">Mensalidades</h3>
   </header>
 
-  <!-- Campo de pesquisa -->
-  <div class="input-field pesquisar row">
-    <i class="material-icons" (click)="focusInput()" for="search">search</i>
-    <input #searchInput id="search" type="text" (keyup)="applyFilter($event)" placeholder="Pesquisar por Nome, Endereço, Telefone ou Data">
+  <!-- Filtro de pesquisa -->
+  <div class="input-field pesquisar">
+    <i class="material-icons prefix" (click)="focusInput()" for="search">search</i>
+    <input #searchInput id="search" type="text" (keyup)="applyFilter($event)" placeholder="Pesquisar por Nome, Data, Valor ou Status">
   </div>
 
   <div class="custom-table">

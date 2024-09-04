@@ -9,7 +9,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { AlunosService } from '../../Services/Alunos.Service/alunos.service';
-import { Mensalidade } from '../../models/aluno.model';
+import { MensalidadeDTO } from '../../models/alunos.model';
+import { BrowserModule } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-aluno-mensalidade',
@@ -29,28 +30,31 @@ import { Mensalidade } from '../../models/aluno.model';
   styleUrl: './aluno-mensalidade.component.css'
 })
 export class AlunoMensalidadeComponent {
-  dataSource = new MatTableDataSource<Mensalidade>();
-  displayedColumns: string[] = ['nome','dataVencimento', 'valor', 'status', 'actions'];
+  dataSource = new MatTableDataSource<MensalidadeDTO>();
+  displayedColumns: string[] = ['nome', 'dataVencimento', 'valor', 'status', 'actions'];
 
-  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
 
-  constructor(private alunosService: AlunosService, private route: ActivatedRoute) {
-
-  }
+  constructor(private alunosService: AlunosService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.dataSource.paginator = this.paginator;
     this.route.paramMap.subscribe(params => {
       const alunoId = +params.get('id')!;
       this.mensalidades(alunoId);
     });
   }
 
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+  }
+
   mensalidades(alunoId: number): void {
     this.alunosService.getMensalidades(alunoId).subscribe(data => {
+      console.log('Dados recebidos:', data);
+
+      // Filtra os dados para garantir que só exiba as mensalidades do aluno especificado
       this.dataSource.data = data.filter(mensalidade => mensalidade.aluno.id === alunoId);
-      this.dataSource.paginator?.firstPage();
     });
   }
 
@@ -76,33 +80,31 @@ export class AlunoMensalidadeComponent {
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
-    if (filterValue) {
-      this.dataSource.filter = filterValue;
-      this.dataSource.filterPredicate = (data: Mensalidade, filter: string) => {
-        const searchString = filter.toLowerCase();
-        return (
-          data.aluno.nome.toLowerCase().includes(searchString) ||
-          this.formatDate(data.dataVencimento).includes(searchString) ||
-          data.valor.toString().includes(searchString) ||
-          this.getStatusName(data.status).toLowerCase().includes(searchString)
-        );
-      };
-    } else {
-      this.dataSource.filter = '';
-    }
+    this.dataSource.filterPredicate = (data: MensalidadeDTO, filter: string) => {
+      const searchString = filter.toLowerCase();
+      return (
+        data.aluno.nome.toLowerCase().includes(searchString) ||
+        this.formatDate(data.dataVencimento).includes(searchString) ||
+        data.valor.toString().includes(searchString) ||
+        this.getStatusName(data.status).toLowerCase().includes(searchString)
+      );
+    };
+    this.dataSource.filter = filterValue;
   }
 
-  // Função para atualizar o status de uma mensalidade
-  aprovarPagamento(id: number): void {
+  aprovarPagamento(mensalidadeId: number): void {
     const novoStatus = 2; // Status para confirmar o pagamento
-    this.alunosService.updateStatus(id, novoStatus).subscribe(
-      response => {
-        console.log(response);
-        this.ngOnInit();
-      },
-      error => {
-        console.error(error);
-      }
-    );
+    console.log(mensalidadeId);
+
+    if (mensalidadeId) {
+      this.alunosService.updateStatus(mensalidadeId, novoStatus).subscribe(
+        response => {
+          this.mensalidades(+this.route.snapshot.paramMap.get('id')!); // Atualiza a lista de mensalidades
+        },
+        error => {
+          console.error('Erro ao aprovar pagamento:', error);
+        }
+      );
+    }
   }
 }
